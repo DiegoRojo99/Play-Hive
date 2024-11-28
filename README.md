@@ -40,12 +40,11 @@ This project is still on developement
 
 ## 🛠️ Tech Stack
 
-- **Frontend**: React + TypeScript  
-- **Styling**: Tailwind CSS  
-- **Backend**: Node.js with Express  
-- **Database**: PostgreSQL (with Prisma ORM)  
-- **Authentication**: Steam OAuth + Firebase Authentication  
-- **Hosting**: Vercel for frontend, Railway/Render for backend  
+- **Frontend**: React + TypeScript + CSS
+- **Backend**: Node.js with Express + Typescript
+- **Database**: PostgreSQL (with Prisma ORM)
+- **Authentication**: Steam OAuth + Firebase Authentication
+- **Hosting**: Vercel for frontend, Railway/Render for backend
 
 ---
 
