@@ -1,28 +1,22 @@
-import './App.css';
-import SteamLoginButton from './components/buttons/SteamLoginButton';
-import useAuth from './hooks/useAuth';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import NavBar from './components/nav/NavBar';
+import './App.css'
 
-function App() {
-  const user = useAuth();
-
+const App: React.FC = () => {
   return (
     <div className="App">
       <header className="App-header">
+        <NavBar />
       </header>
-      <body>
-        <h1>Welcome to Play Hive</h1>
-        {!user ? (
-          <SteamLoginButton />
-        ) : (
-          <div>
-            <h2>Welcome, {user.username}!</h2>
-            <img src={user.avatar} alt="User Avatar" width={100} />
-            <p>Steam ID: {user.steamID}</p>
-          </div>
-        )}
-      </body>
+      <main>
+        <Router>
+          <Routes>
+          </Routes>
+        </Router>
+      </main>
     </div>
   );
-}
+};
 
 export default App;
