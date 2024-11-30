@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import UserProfile from './UserProfile';
 import SteamLoginButton from '../buttons/SteamLoginButton';
 
