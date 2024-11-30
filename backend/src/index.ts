@@ -38,7 +38,6 @@ app.use(passport.session());
 
 app.get('/api/user', (req, res) => {
   if (req.isAuthenticated()) {
-    console.log("Req User: ", req.user);
     res.json(req.user);
   } 
   else {

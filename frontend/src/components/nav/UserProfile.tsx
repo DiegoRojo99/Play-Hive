@@ -6,13 +6,8 @@ interface User {
   avatar: string;
 }
 
-interface UserProfileProps {
-  user: User | null;
-}
-
-const UserProfile: React.FC<UserProfileProps> = ({ user }) => {
+const UserProfile: React.FC<{user: User | null}> = ({ user }) => {
   if(user){
-    console.log("user: ", user);
     return (
       <div style={{ display: 'flex', alignItems: 'center', width: 'fit-content', marginRight: '16px' }}>
         <span>{user.username}</span>
