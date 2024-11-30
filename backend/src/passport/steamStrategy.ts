@@ -22,12 +22,11 @@ passport.use(
     },
     (identifier: string, profile: any, done: Function) => {
       // TO DO save or check user with DB
-      // TO DO add avatar
       const user = {
         steamID: profile.id,
         username: profile.displayName,
+        avatar: profile.photos[1]?.value,
       };
-      
       return done(null, user);
     }
   )

@@ -15,12 +15,15 @@ const UserProfile: React.FC<UserProfileProps> = ({ user }) => {
     console.log("user: ", user);
     return (
       <div style={{ display: 'flex', alignItems: 'center', width: 'fit-content', marginRight: '16px' }}>
-        {/* <img
-          src={`https://steamcommunity.com/profiles/${user.steamID}/avatar`}
-          alt="User Avatar"
-          className="avatar"
-        /> */}
         <span>{user.username}</span>
+        {user.avatar ? 
+          <img
+            src={user.avatar}
+            alt="User Avatar"
+            className="avatar"
+            style={{marginLeft: '8px', height: '40px', borderRadius: '8px'}}
+          /> 
+        : <></> }
       </div>
     );
   };  
