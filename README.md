@@ -8,7 +8,8 @@
 
 ### 🎮 Current Features
 
-This project is still on developement
+1. **Steam Login Integration**: 
+   You can now log in with your Steam account.
 
 ### 🚀 Coming Soon
 
@@ -53,7 +54,7 @@ This project is still on developement
 Here's how the project will evolve. Check back for updates!
 
 - [x] Set up project repository  
-- [ ] Integrate Steam OAuth for login  
+- [x] Integrate Steam OAuth for login  
 - [ ] Fetch and display Steam library data  
 - [ ] Build game stats dashboard  
 - [ ] Implement game recommendation engine  
