@@ -7,7 +7,7 @@ const router = Router();
 router.get('/steam', passport.authenticate('steam'));
 router.get('/steam/return', passport.authenticate('steam', { failureRedirect: '/' }),
   (req, res) => {
-    res.redirect('http://localhost:3000');
+    res.redirect('http://localhost:3000/library');
   }
 );
 
