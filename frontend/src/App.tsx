@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import NavBar from './components/nav/NavBar';
 import './App.css'
+import Library from './components/pages/library/Library';
 
 const App: React.FC = () => {
   return (
@@ -12,6 +13,7 @@ const App: React.FC = () => {
       <main>
         <Router>
           <Routes>
+            <Route path="/library" Component={Library} />
           </Routes>
         </Router>
       </main>
