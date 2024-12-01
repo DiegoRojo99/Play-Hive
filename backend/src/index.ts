@@ -6,6 +6,7 @@ import cors from 'cors';
 
 import authRoutes from './routes/authRoutes';
 import libraryRoutes from './routes/libraryRoutes';
+import steamRoutes from './routes/steamRoutes';
 import './passport/steamStrategy';
 
 dotenv.config();
@@ -48,17 +49,7 @@ app.get('/api/user', (req, res) => {
 
 app.use('/auth', authRoutes);
 app.use('/api/library', libraryRoutes);
-
-app.get('/api/steam/:appid', async (req, res) => {
-  const { appid } = req.params;
-  try {
-    const response = await fetch(`https://store.steampowered.com/api/appdetails?appids=${appid}`);
-    const data = await response.json();
-    res.json(data);
-  } catch (error) {
-    res.status(500).send('Error fetching data from Steam');
-  }
-});
+app.use('/api/steam', steamRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);

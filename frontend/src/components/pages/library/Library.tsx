@@ -30,7 +30,7 @@ const Library: React.FC = () => {
 
         const gamesWithImages: GameWithHeader[] = await Promise.all(
           data.map(async (game: Game) => {
-            const gameResponse = await fetch(`http://localhost:5000/api/steam/${game.appid}`);
+            const gameResponse = await fetch(`http://localhost:5000/api/steam/game/${game.appid}`);
             const gameData = await gameResponse.json();
             if (gameData[game.appid].success) {
               const headerImage = gameData[game.appid].data.header_image;
