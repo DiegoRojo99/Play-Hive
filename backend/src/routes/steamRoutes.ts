@@ -1,8 +1,17 @@
-import express from 'express';
-const router = express.Router();
+import express, { Request, Response } from 'express';
+import NodeCache from 'node-cache';
 
-router.get('/game/:appid', async (req, res) => {
+const router = express.Router();
+const gameCache = new NodeCache({ stdTTL: 86400, checkperiod: 3600 });
+
+router.get('/game/:appid', async (req: Request, res: Response) : Promise<any> => {
+
   const { appid } = req.params;
+  const cachedData: any | undefined = gameCache.get(appid);
+  
+  if (cachedData) {
+    return res.json(cachedData);
+  }
 
   try {
     const response = await fetch(`https://store.steampowered.com/api/appdetails?appids=${appid}`);
@@ -10,6 +19,7 @@ router.get('/game/:appid', async (req, res) => {
       throw new Error('Failed to fetch data from Steam');
     }
     const data = await response.json();
+    gameCache.set(appid, data);
     res.json(data);
   } 
   catch (error) {
