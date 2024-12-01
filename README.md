@@ -9,12 +9,9 @@
 ### 🎮 Current Features
 
 1. **Steam Login Integration**: 
-   You can now log in with your Steam account.
+   Log in with your Steam account to access your library.
 
 ### 🚀 Coming Soon
-
-1. **Steam Integration**: 
-   Log in with your Steam account to access your library and stats.
  
 2. **Game Stats Dashboard**: 
    View your playtime, achievements, and other insights for each game in your library.
@@ -55,7 +52,7 @@ Here's how the project will evolve. Check back for updates!
 
 - [x] Set up project repository  
 - [x] Integrate Steam OAuth for login  
-- [ ] Fetch and display Steam library data  
+- [x] Fetch and display Steam library data  
 - [ ] Build game stats dashboard  
 - [ ] Implement game recommendation engine  
 - [ ] Add wishlist price tracking  
