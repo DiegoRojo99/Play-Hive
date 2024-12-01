@@ -1,5 +1,11 @@
+html, body, .App {
+  overflow-x: hidden;
+  width: 100vw;
+}
+
 .App {
   text-align: center;
+  width: 100vw;
 }
 
 .App-header {
@@ -11,6 +17,7 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+  width: 100vw;
 }
 
 .App-link {
