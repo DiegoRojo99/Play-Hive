@@ -5,6 +5,7 @@ import dotenv from 'dotenv';
 import cors from 'cors';
 
 import authRoutes from './routes/authRoutes';
+import libraryRoutes from './routes/libraryRoutes';
 import './passport/steamStrategy';
 
 dotenv.config();
@@ -46,6 +47,7 @@ app.get('/api/user', (req, res) => {
 });
 
 app.use('/auth', authRoutes);
+app.use('/api/library', libraryRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
