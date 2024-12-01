@@ -14,7 +14,7 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   const [user, setUser] = useState<SteamUser | null>(null);
 
   useEffect(() => {
-    fetch('http://localhost:5000/api/user', {
+    fetch(`${process.env.REACT_APP_API_BASE_URL}/api/user`, {
       method: 'GET',
       credentials: 'include',
     })

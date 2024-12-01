@@ -22,7 +22,7 @@ const Library: React.FC = () => {
     }
     const fetchLibrary = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/api/library?steamID=${user.steamID}`);
+        const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/api/library?steamID=${user.steamID}`);
         if (!response.ok) {
           throw new Error(`Error: ${response.statusText}`);
         }
@@ -30,7 +30,7 @@ const Library: React.FC = () => {
 
         const gamesWithImages: GameWithHeader[] = await Promise.all(
           data.map(async (game: Game) => {
-            const gameResponse = await fetch(`http://localhost:5000/api/steam/game/${game.appid}`);
+            const gameResponse = await fetch(`${process.env.REACT_APP_API_BASE_URL}/api/steam/game/${game.appid}`);
             const gameData = await gameResponse.json();
             if (gameData[game.appid].success) {
               const headerImage = gameData[game.appid].data.header_image;
