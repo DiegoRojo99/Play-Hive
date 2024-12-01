@@ -23,8 +23,13 @@ interface Game {
   rtime_last_played: number;
 }
 
+type GameWithHeader = Game & {
+  header_image: string
+}
+
 export type {
   SteamUser,
   UserContextType,
-  Game
+  Game,
+  GameWithHeader
 }

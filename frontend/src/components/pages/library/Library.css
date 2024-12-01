@@ -1,8 +1,8 @@
 .library-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(256px, 1fr));
   gap: 20px;
-  padding: 20px;
+  padding: 10px;
   justify-items: center;
 }
 
@@ -13,8 +13,11 @@
   overflow: hidden;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   width: 100%;
-  max-width: 250px;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .library-item:hover {
@@ -24,7 +27,7 @@
 
 .library-item img {
   width: 100%;
-  height: 180px;
+  height: auto;
   object-fit: cover;
   border-bottom: 2px solid #f0f0f0;
   image-rendering: -webkit-optimize-contrast;
@@ -34,6 +37,7 @@
 .library-item-text {
   font-size: 16px;
   margin: 10px 0;
+  text-align: center;
   color: #333;
 }
 
@@ -41,7 +45,6 @@
   font-weight: bold;
 }
 
-/* Responsive typography */
 @media (max-width: 768px) {
   .library-item-text {
     font-size: 14px;

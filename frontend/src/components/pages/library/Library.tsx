@@ -2,17 +2,16 @@ import React, { useEffect, useState } from 'react';
 import { useUser } from '../../../contexts/UserContext';
 import './Library.css';
 import LibraryItem from './LibraryItem';
-import { Game } from '../../../types/Types';
+import { Game, GameWithHeader } from '../../../types/Types';
 
 const Library: React.FC = () => {
   const { user } = useUser();
-  const [library, setLibrary] = useState<Game[]>([]);
+  const [library, setLibrary] = useState<GameWithHeader[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     if (!user) {
-      console.log("Waiting for user to be set...");
       return;
     }
 
@@ -28,7 +27,20 @@ const Library: React.FC = () => {
           throw new Error(`Error: ${response.statusText}`);
         }
         const data = await response.json();
-        setLibrary(data);
+
+        const gamesWithImages: GameWithHeader[] = await Promise.all(
+          data.map(async (game: Game) => {
+            const gameResponse = await fetch(`http://localhost:5000/api/steam/${game.appid}`);
+            const gameData = await gameResponse.json();
+            if (gameData[game.appid].success) {
+              const headerImage = gameData[game.appid].data.header_image;
+              return { ...game, header_image: headerImage };
+            }
+            return game;
+          })
+        );
+
+        setLibrary(gamesWithImages);
       } catch (err: any) {
         setError(err.message);
       } finally {
@@ -52,7 +64,7 @@ const Library: React.FC = () => {
       <h1>{`${user?.username}'s Library`}</h1>
       <div className="library-grid">
         {library.length === 0 ? ( <p>No games in library</p> ) : 
-          library.map((game: Game) => 
+          library.map((game: GameWithHeader) => 
             <LibraryItem key={game.appid} game={game} /> 
           )}        
       </div>
