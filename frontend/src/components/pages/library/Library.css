@@ -43,6 +43,11 @@
   color: #333;
 }
 
+.library-item-link {
+  text-decoration: none;
+  color: inherit;
+}
+
 .library-item-text:first-of-type {
   font-weight: bold;
   margin: 8px 0 4px;

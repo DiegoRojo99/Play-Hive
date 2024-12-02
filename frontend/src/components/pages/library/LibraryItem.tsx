@@ -1,6 +1,7 @@
 import React from 'react';
 import './Library.css';
 import { GameWithHeader } from '../../../types/Types';
+import { Link } from 'react-router-dom';
 
 interface LibraryItemProps {
   game: GameWithHeader;
@@ -8,6 +9,7 @@ interface LibraryItemProps {
 
 const LibraryItem: React.FC<LibraryItemProps> = ({game}) => {
   return (
+    <Link to={`/game/${game.appid}`} className="library-item-link">
     <div className='library-item' key={game.appid}>
       <img 
         alt={game.name} 
@@ -21,6 +23,7 @@ const LibraryItem: React.FC<LibraryItemProps> = ({game}) => {
       <p className='library-item-text'>{game.name}</p>
       <p className='library-item-text'>{Math.round(game.playtime_forever / 60)} hours played</p>
     </div>
+    </Link>
   );
 };
 
