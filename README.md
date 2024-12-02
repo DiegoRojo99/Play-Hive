@@ -12,7 +12,10 @@
    Log in with your Steam account to access your library.
 
 2. **Game Details Pages**:
-   Check game details including platforms, screenshots and available achievements
+   Check game details including platforms, screenshots and available achievements.
+
+3. **Game Browser**:
+   Look up any Steam game by name or filter the Steam library.
 
 ### 🚀 Coming Soon
  
@@ -56,7 +59,8 @@ Here's how the project will evolve. Check back for updates!
 - [x] Set up project repository  
 - [x] Integrate Steam OAuth for login  
 - [x] Fetch and display Steam library data  
-- [x] Game page with details and info like screenshots, platforms and achievements  
+- [x] Game page with details and info like screenshots, platforms and achievements 
+- [x] Look up any steam game and see its details. Search by name or use the filters based on genre, etc.
 - [ ] Build game stats dashboard  
 - [ ] Implement game recommendation engine  
 - [ ] Add wishlist price tracking  
