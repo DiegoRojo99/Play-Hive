@@ -11,27 +11,30 @@
 1. **Steam Login Integration**: 
    Log in with your Steam account to access your library.
 
+2. **Game Details Pages**:
+   Check game details including platforms, screenshots and available achievements
+
 ### 🚀 Coming Soon
  
-2. **Game Stats Dashboard**: 
+1. **Game Stats Dashboard**: 
    View your playtime, achievements, and other insights for each game in your library.
 
-3. **Game Recommendations**  
+2. **Game Recommendations**  
    Get tailored game suggestions based on your library, play habits, and preferences.
 
-4. **Wishlist Price Tracker**  
+3. **Wishlist Price Tracker**  
    Receive notifications when your wishlist games are on sale.
 
-5. **Achievement Hunting**  
+4. **Achievement Hunting**  
    Track your progress for game achievements and get tips to complete them.
 
-6. **Library Visualizer**  
+5. **Library Visualizer**  
    A stunning visual representation of your game library by genres, playtime, and more.
 
-7. **Co-Op Game Finder**  
+6. **Co-Op Game Finder**  
    Discover multiplayer and co-op games you and your friends own.
 
-8. **Play Schedules**  
+7. **Play Schedules**  
    Coordinate game sessions with your friends using a built-in scheduler.
 
 ---
@@ -53,6 +56,7 @@ Here's how the project will evolve. Check back for updates!
 - [x] Set up project repository  
 - [x] Integrate Steam OAuth for login  
 - [x] Fetch and display Steam library data  
+- [x] Game page with details and info like screenshots, platforms and achievements  
 - [ ] Build game stats dashboard  
 - [ ] Implement game recommendation engine  
 - [ ] Add wishlist price tracking  
