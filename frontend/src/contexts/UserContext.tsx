@@ -1,5 +1,10 @@
 import React, { createContext, useState, useEffect, useContext, ReactNode } from 'react';
-import { SteamUser, UserContextType } from '../types/Types';
+import { SteamUser } from '../types/Types';
+
+interface UserContextType {
+  user: SteamUser | null;
+  setUser: React.Dispatch<React.SetStateAction<SteamUser | null>>;
+}
 
 const UserContext = createContext<UserContextType | undefined>(undefined);
 export const useUser = (): UserContextType => {
