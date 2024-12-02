@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import NavBar from './components/nav/NavBar';
 import './App.css'
 import Library from './components/pages/library/Library';
+import GameDetails from './components/pages/games/GameDetails';
 
 const App: React.FC = () => {
   return (
@@ -14,6 +15,7 @@ const App: React.FC = () => {
         <Router>
           <Routes>
             <Route path="/library" Component={Library} />
+            <Route path="/game/:appid" element={<GameDetails />} />
           </Routes>
         </Router>
       </main>
