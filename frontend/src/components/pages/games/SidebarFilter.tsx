@@ -8,7 +8,7 @@ type SidebarFilterProps = {
 };
 
 const SidebarFilter: React.FC<SidebarFilterProps> = ({ onFiltersChange }) => {
-  const [openFilter, setOpenFilter] = useState<string | null>(null);
+  const [openFilter, setOpenFilter] = useState<string | null>("Genre");
   const [selectedOptions, setSelectedOptions] = useState<{ [key: string]: string[] }>({
     Genre: [],
   });
@@ -65,7 +65,7 @@ const SidebarFilter: React.FC<SidebarFilterProps> = ({ onFiltersChange }) => {
             <p className="selected-options">
               {selectedOptions[filter]?.length
                 ? selectedOptions[filter].join(", ")
-                : "None"}
+                : "No option selected"}
             </p>
           )}
         </div>
