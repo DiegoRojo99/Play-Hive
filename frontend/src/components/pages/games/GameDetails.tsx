@@ -16,7 +16,7 @@ const GameDetails: React.FC = () => {
         if (!appid) {
           throw new Error('Game Id is missing');
         }
-        const response = await fetch(`http://localhost:5000/api/steam/game/${appid}`);
+        const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/api/steam/game/${appid}`);
         if (!response.ok) {
           throw new Error('Failed to fetch game details');
         }
