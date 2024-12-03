@@ -40,7 +40,7 @@ const GameDetails: React.FC = () => {
 
   return (
     <>
-    <div className="game-header" style={{ backgroundImage: `url(${game.background_raw})` }} >
+    <div className="game-header" style={{ backgroundImage: `url(${game.background})` }} >
       <h1>{game.name}</h1>
       {game.metacritic && (
         <a href={game.metacritic.url} target="_blank" rel="noopener noreferrer" className="metacritic-score">
