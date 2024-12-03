@@ -19,7 +19,7 @@ const updateGameDataFromSteamAPI = async (minAppId: number, maxAppId: number) =>
 
     if (data?.[appid]?.success) {
       const gameData = data[appid].data;
-      console.log(appid, ": ", gameData.type);
+      console.log(appid, ":", gameData.type);
 
       if (gameData.type !== "game") {
         await prisma.game.delete({
@@ -27,6 +27,9 @@ const updateGameDataFromSteamAPI = async (minAppId: number, maxAppId: number) =>
         });
       }
       else{
+        const releaseDate = gameData.release_date.date ? new Date(gameData.release_date.date) : new Date(gameData.release_date);
+        const validReleaseDate = isNaN(releaseDate.getTime()) ? null : releaseDate;
+
         await prisma.game.update({
           where: { appid },
           data: {
@@ -36,7 +39,7 @@ const updateGameDataFromSteamAPI = async (minAppId: number, maxAppId: number) =>
             languages: gameData.supported_languages ?? null,
             headerImage: gameData.header_image ?? null,
             capsuleImage: gameData.capsule_image ?? null,
-            releaseDate: gameData.release_date?.date ? new Date(gameData.release_date.date) : null,
+            releaseDate: validReleaseDate,
             backgroundImage: gameData.background ?? null,
           },
         });
@@ -73,4 +76,4 @@ const updateGameDataFromSteamAPI = async (minAppId: number, maxAppId: number) =>
   }
 };
 
-updateGameDataFromSteamAPI(371951, 371951);
+updateGameDataFromSteamAPI(1, 1);
