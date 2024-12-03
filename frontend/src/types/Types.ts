@@ -100,10 +100,29 @@ type GameWithDetails = {
   };
 };
 
+type GameDB = {
+  appid: number,
+  name: string,
+  description: string | null,
+  shortDescription: string | null,
+  languages: string | null,
+  headerImage: string | null,
+  capsuleImage: string | null,
+  releaseDate: Date,
+  backgroundImage: string | null,
+  genres: Genre[],
+}
+
+type Genre = {
+  id: number,
+  descriptions: string,
+}
+
 
 export type {
   SteamUser,
   Game,
   GameWithHeader,
-  GameWithDetails
+  GameWithDetails,
+  GameDB
 }

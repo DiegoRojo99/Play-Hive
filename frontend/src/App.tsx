@@ -4,22 +4,24 @@ import NavBar from './components/nav/NavBar';
 import './App.css'
 import Library from './components/pages/library/Library';
 import GameDetails from './components/pages/games/GameDetails';
+import GameBrowser from './components/pages/games/GameBrowser';
 
 const App: React.FC = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <NavBar />
-      </header>
-      <main>
-        <Router>
-          <Routes>
-            <Route path="/library" Component={Library} />
-            <Route path="/game/:appid" element={<GameDetails />} />
-          </Routes>
-        </Router>
-      </main>
-    </div>
+    <Router>
+      <div className="App">
+        <header className="App-header">
+          <NavBar />
+        </header>
+        <main>
+            <Routes>
+              <Route path="/library" Component={Library} />
+              <Route path="/game/:appid" element={<GameDetails />} />
+              <Route path="/browser" element={<GameBrowser />} />
+            </Routes>
+        </main>
+      </div>
+    </Router>
   );
 };
 
