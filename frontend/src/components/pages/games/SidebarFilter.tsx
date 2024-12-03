@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronRight, faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import './SidebarFilter.css';
+import { genres } from "../../../data/Genres";
 
 type SidebarFilterProps = {
   onFiltersChange: (selectedFilters: { [key: string]: string[] }) => void;
@@ -32,7 +33,7 @@ const SidebarFilter: React.FC<SidebarFilterProps> = ({ onFiltersChange }) => {
   };
 
   const filters: Record<string, string[]> = {
-    Genre: ["Action", "Adventure", "RPG", "Strategy", "Shooter"]
+    Genre: genres
   };
 
   return (
