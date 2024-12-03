@@ -37,19 +37,6 @@ const GameBrowser: React.FC = () => {
     fetchGames(filters);
   }, [filters]);
 
-  if(loading){
-    return (
-      <div className="game-browser-container">
-        <aside className="game-browser-sidebar">
-          <h3>Filters</h3>
-          <SidebarFilter onFiltersChange={setFilters} />
-        </aside>
-        <section className="game-browser-main">
-          <h1>Loading...</h1>
-        </section>
-    </div>
-    )
-  }
   return (
     <div className="game-browser-container">
       <aside className="game-browser-sidebar">
@@ -57,17 +44,25 @@ const GameBrowser: React.FC = () => {
         <SidebarFilter onFiltersChange={setFilters} />
       </aside>
       <section className="game-browser-main">
-        <div className="game-browser-options">
-          <h2>Games</h2>
-        </div>
-        <div className="game-browser-grid">
-          {games.map((game) => (
-            <GameCard key={game.appid} game={game} />
-          ))}
-        </div>
+        {loading ? (
+          <div className="game-browser-loading">
+            <h1>Loading...</h1>
+          </div>
+        ) : (
+          <>
+            <div className="game-browser-options">
+              <h2>Games</h2>
+            </div>
+            <div className="game-browser-grid">
+              {games.map((game) => (
+                <GameCard key={game.appid} game={game} />
+              ))}
+            </div>
+          </>
+        )}
       </section>
     </div>
-  );
+  );  
 };
 
 export default GameBrowser;
