@@ -18,8 +18,21 @@
   background-position: center;
   color: white;
   text-align: center;
-  padding: 80px 16px;
+  padding: 160px 0;
   position: relative;
+  transition: padding 0.75s;
+}
+
+@media screen and (max-width: 900px) {
+  .game-header {
+    padding: 96px 0;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .game-header {
+    padding: 48px 0;
+  }
 }
 
 .game-header img {
