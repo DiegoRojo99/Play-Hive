@@ -10,9 +10,6 @@ export const getGamesWithGenres = async (limit: number, offset: number) => {
       include: {
         genres: true,
       },
-      orderBy: {
-        name: 'asc',
-      },
     });
 
     return games;
