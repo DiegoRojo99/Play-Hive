@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import GameCard from './GameCard';
 import { GameDB } from '../../../types/Types';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFilter } from '@fortawesome/free-solid-svg-icons';
 
 const GameBrowser: React.FC = () => {
   const [games, setGames] = useState<GameDB[]>([]);
@@ -22,17 +24,27 @@ const GameBrowser: React.FC = () => {
   }
 
   return (
-    <div className="game-browser">
-      <div className="game-grid">
-        <h2 style={{textAlign: 'left', marginBottom: '4px'}}>Games</h2>
-        <hr></hr>
-        <div className="game-cards">
+    <div className="game-browser-container">
+      <aside className="game-browser-sidebar">
+        <h3>Filters</h3>
+        <ul>
+          <li>Action</li>
+          <li>Adventure</li>
+          <li>RPG</li>
+        </ul>
+      </aside>
+      <section className="game-browser-main">
+        <div className="game-browser-options">
+          <h2>Games</h2>
+        </div>
+        <div className="game-browser-grid">
           {games.map((game) => (
             <GameCard key={game.appid} game={game} />
           ))}
         </div>
-      </div>
+      </section>
     </div>
+
   );
 };
 

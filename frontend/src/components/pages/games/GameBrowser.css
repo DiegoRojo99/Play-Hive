@@ -1,18 +1,50 @@
-.game-browser {
-  width: calc(100vw);
+.game-browser-container {
   display: flex;
+  height: 100vh; /* Adjust as needed */
 }
 
-.game-grid {
-  width: calc(100vw - 48px);
+.game-browser-sidebar {
+  flex: 1;
+  background-color: #f8f8f8;
   padding: 16px;
+  border-right: 1px solid #ddd;
+  overflow-y: auto;
 }
 
-.game-grid h2 {
-  margin-bottom: 20px;
+.game-browser-main {
+  flex: 4;
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  overflow-y: auto;
 }
+
+.game-browser-options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.game-browser-options h2 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+#genre-filter {
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.game-browser-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
+}
+
 
 .game-cards {
+  width: 100%;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(216px, 1fr));
   gap: 10px;
