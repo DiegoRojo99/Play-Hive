@@ -6,7 +6,8 @@ const SteamLoginButton: React.FC = () => {
       <a href={`${process.env.REACT_APP_API_BASE_URL}/auth/steam`}>
         <img 
           src="https://community.fastly.steamstatic.com/public/images/signinthroughsteam/sits_01.png" 
-          alt="Login with Steam" 
+          alt="Login with Steam"
+          className='steam-login-button' 
         />
       </a>
     </div>

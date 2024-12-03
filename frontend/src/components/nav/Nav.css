@@ -1,4 +1,62 @@
-nav a{
-  color: inherit;
+.navbar {
+  background-color: #282c34;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+}
+
+.navbar-left {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.navbar-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.navbar-links {
+  flex: 2;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.navbar-links a {
   text-decoration: none;
+  color: white;
+  font-size: 1rem;
+  transition: font-size 0.5s;
+}
+
+.navbar-links a:hover {
+  font-size: 1.25rem;
+}
+
+.navbar-right {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.navbar-right, .navbar-right div{
+  height: 32px;
+}
+
+.steam-login-button {
+  height: 32px;
+  margin: auto 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .navbar-links {
+    display: none;
+  }
+  .navbar-right {
+    justify-content: center;
+  }
 }

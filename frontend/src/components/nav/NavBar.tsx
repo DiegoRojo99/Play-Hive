@@ -9,25 +9,15 @@ const NavBar: React.FC = () => {
   const { user } = useUser();
 
   return (
-    <nav style={{ display: 'flex', width: '100%', justifyContent: 'space-between', padding: '10px 20px' }}>
-      <div style={{ display: 'flex', alignItems: 'center', marginLeft: '16px' }}>Play Hive</div>
-      <Link to="/browser">Browser</Link>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div style={{ display: 'flex', alignItems: 'center', marginRight: '32px' }}>
+    <nav className="navbar">
+      <div className="navbar-left">
+        <span className="navbar-title">Play Hive</span>
+      </div>
+      <div className="navbar-links">
+        <Link to="/browser">Browser</Link>
+        {user ? <Link to="/library">Library</Link> : <></>}
+      </div>
+      <div className="navbar-right">
         {user ? <UserProfile user={user} /> : <SteamLoginButton />}
       </div>
     </nav>
