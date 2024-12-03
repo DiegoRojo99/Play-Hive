@@ -3,6 +3,7 @@ import GameCard from './GameCard';
 import { GameDB } from '../../../types/Types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFilter } from '@fortawesome/free-solid-svg-icons';
+import SidebarFilter from './SidebarFilter';
 
 const GameBrowser: React.FC = () => {
   const [games, setGames] = useState<GameDB[]>([]);
@@ -27,11 +28,7 @@ const GameBrowser: React.FC = () => {
     <div className="game-browser-container">
       <aside className="game-browser-sidebar">
         <h3>Filters</h3>
-        <ul>
-          <li>Action</li>
-          <li>Adventure</li>
-          <li>RPG</li>
-        </ul>
+        <SidebarFilter />
       </aside>
       <section className="game-browser-main">
         <div className="game-browser-options">
