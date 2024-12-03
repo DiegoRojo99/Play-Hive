@@ -3,11 +3,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronRight, faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import './SidebarFilter.css';
 
-const SidebarFilter: React.FC = () => {
+type SidebarFilterProps = {
+  onFiltersChange: (selectedFilters: { [key: string]: string[] }) => void;
+};
+
+const SidebarFilter: React.FC<SidebarFilterProps> = ({ onFiltersChange }) => {
   const [openFilter, setOpenFilter] = useState<string | null>(null);
   const [selectedOptions, setSelectedOptions] = useState<{ [key: string]: string[] }>({
     Genre: [],
-    Platform: [],
   });
 
   const toggleFilter = (filterName: string) => {
@@ -18,12 +21,13 @@ const SidebarFilter: React.FC = () => {
     setSelectedOptions((prev) => {
       const currentOptions = prev[filterName] || [];
       const isSelected = currentOptions.includes(option);
-      return {
-        ...prev,
-        [filterName]: isSelected
-          ? currentOptions.filter((opt) => opt !== option)
-          : [...currentOptions, option],
-      };
+      const updatedOptions = isSelected
+        ? currentOptions.filter((opt) => opt !== option)
+        : [...currentOptions, option];
+
+      const updatedFilters = { ...prev, [filterName]: updatedOptions };
+      onFiltersChange(updatedFilters);
+      return updatedFilters;
     });
   };
 
