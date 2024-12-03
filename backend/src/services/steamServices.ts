@@ -26,3 +26,15 @@ export async function fetchUserLibrary(steamID: string) {
   const data = await response.json();
   return data.response?.games || [];
 }
+
+
+/**
+ * Fetch all games from steam.
+ * @returns An array of games..
+ */
+export async function fetchSteamGames() {
+  const url = 'https://api.steampowered.com/ISteamApps/GetAppList/v2/';
+  const response = await fetch(url);
+  const data = await response.json();
+  return data.applist.apps;
+};

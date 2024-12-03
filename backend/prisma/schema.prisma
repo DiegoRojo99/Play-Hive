@@ -1,7 +1,7 @@
 datasource db {
-  provider    = "postgresql"
-  url         = env("DATABASE_URL")
-  directUrl   = env("DIRECT_URL")
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
 }
 
 generator client {
@@ -9,9 +9,20 @@ generator client {
 }
 
 model Game {
-  id            Int    @id @default(autoincrement())
-  appid         String @unique
-  name          String
-  genres        String
-  description   String?
+  appid               Int         @id
+  name                String
+  description         String?  
+  shortDescription    String? 
+  languages           String?  
+  headerImage         String?  
+  capsuleImage        String?
+  releaseDate         DateTime? 
+  backgroundImage     String? 
+  genres              Genre[]     @relation("GameGenres")
+}
+
+model Genre {
+  id                  Int         @id
+  description         String
+  games               Game[]      @relation("GameGenres")
 }
