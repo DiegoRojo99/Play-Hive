@@ -7,11 +7,11 @@ const router = express.Router();
 router.get("/", async (req: Request, res: Response): Promise<any> => {
   const limit = parseInt(req.query.limit as string) || 100;
   const offset = parseInt(req.query.offset as string) || 0;
-  const genres: string[] = parseGenresParam(req.query.genres)
+  const genre: string[] = parseGenresParam(req.query.genre)
   
-  if (genres.length){
+  if (genre.length){
     try {
-      const games = await getGamesByGenres(genres, limit, offset);
+      const games = await getGamesByGenres(genre, limit, offset);
       return res.status(200).json(games);
     } 
     catch (error: any) {

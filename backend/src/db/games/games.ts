@@ -38,9 +38,6 @@ export const getGamesByGenres = async (genres: string[], limit: number, offset: 
       include: {
         genres: true,
       },
-      orderBy: {
-        name: 'asc',
-      },
     });
 
     return games;
