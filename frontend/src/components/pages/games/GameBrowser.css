@@ -1,6 +1,5 @@
 .game-browser-container {
   display: flex;
-  height: 100vh; /* Adjust as needed */
 }
 
 .game-browser-sidebar {
