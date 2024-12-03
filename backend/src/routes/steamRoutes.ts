@@ -5,7 +5,6 @@ const router = express.Router();
 const gameCache = new NodeCache({ stdTTL: 86400, checkperiod: 3600 });
 
 router.get('/game/:appid', async (req: Request, res: Response) : Promise<any> => {
-
   const { appid } = req.params;
   const cachedData: any | undefined = gameCache.get(appid);
   
