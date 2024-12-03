@@ -73,4 +73,4 @@ const updateGameDataFromSteamAPI = async (minAppId: number, maxAppId: number) =>
   }
 };
 
-updateGameDataFromSteamAPI(100000, 100000);
+updateGameDataFromSteamAPI(371951, 371951);
