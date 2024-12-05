@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import GameCard from './GameCard';
 import { GameDB } from '../../../types/Types';
 import SidebarFilter from './SidebarFilter';
+import Loader from '../../extras/Loader';
 
 const GameBrowser: React.FC = () => {
   const [games, setGames] = useState<GameDB[]>([]);
@@ -44,7 +45,7 @@ const GameBrowser: React.FC = () => {
       <section className="game-browser-main">
         {loading ? (
           <div className="game-browser-loading">
-            <h1>Loading...</h1>
+            <Loader />
           </div>
         ) : (
           <>
