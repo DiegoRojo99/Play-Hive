@@ -1,7 +1,7 @@
 datasource db {
   provider  = "postgresql"
-  url       = env("DATABASE_URL")
-  directUrl = env("DIRECT_URL")
+  url       = env("SUPABASE_DATABASE_URL")
+  directUrl = env("SUPABASE_DIRECT_URL")
 }
 
 generator client {
@@ -25,4 +25,10 @@ model Genre {
   id                  Int         @id
   description         String
   games               Game[]      @relation("GameGenres")
+}
+
+model Profile {
+  userId      String      @id
+  steamId     String?
+  avatarUrl   String?
 }
