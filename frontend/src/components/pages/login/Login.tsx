@@ -1,18 +1,33 @@
 import React, { useState } from 'react';
+import { createClient } from '@supabase/supabase-js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGoogle, faGithub, faFacebook } from '@fortawesome/free-brands-svg-icons';
 import './Login.css';
+
+const supabase = createClient(
+  process.env.REACT_APP_SUPABASE_URL!,
+  process.env.REACT_APP_SUPABASE_ANON_KEY!
+);
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  const handleLogin = async (e: React.FormEvent) => {
+  const handleEmailLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    // Logic for handling email/password login (e.g., send data to backend or Supabase)
-    setLoading(false);
+    setError(null);
+
+    try {
+      const { error } = await supabase.auth.signInWithPassword({ email, password });
+      if (error) throw error;
+    } catch (err: any) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleOAuthLogin = (provider: string) => {
@@ -23,7 +38,7 @@ const Login: React.FC = () => {
     <div className="login-container">
       <div className="login-box">
         <h1 className="login-title">Welcome to Play Hive</h1>
-        <form onSubmit={handleLogin}>
+        <form onSubmit={handleEmailLogin}>
           <div className="input-group">
             <input
               type="email"
@@ -44,6 +59,7 @@ const Login: React.FC = () => {
               required
             />
           </div>
+          {error && <p className="error-message">{error}</p>}
           <button type="submit" className="login-button" disabled={loading}>
             {loading ? 'Logging In...' : 'Log In'}
           </button>
