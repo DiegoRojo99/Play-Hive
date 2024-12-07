@@ -2,13 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { useUser } from '../../../contexts/UserContext';
 import './Library.css';
 import LibraryItem from './LibraryItem';
-import { Game, GameWithHeader } from '../../../types/Types';
 
-const Library: React.FC = () => {
+const Library = () => {
   const { user } = useUser();
-  const [library, setLibrary] = useState<GameWithHeader[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
+  const [library, setLibrary] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     if (!user) {
@@ -28,8 +27,8 @@ const Library: React.FC = () => {
         }
         const data = await response.json();
 
-        const gamesWithImages: GameWithHeader[] = await Promise.all(
-          data.map(async (game: Game) => {
+        const gamesWithImages = await Promise.all(
+          data.map(async (game) => {
             const gameResponse = await fetch(`${process.env.REACT_APP_API_BASE_URL}/api/steam/game/${game.appid}`);
             const gameData = await gameResponse.json();
             if (gameData[game.appid].success) {
@@ -41,7 +40,7 @@ const Library: React.FC = () => {
         );
 
         setLibrary(gamesWithImages);
-      } catch (err: any) {
+      } catch (err) {
         setError(err.message);
       } finally {
         setLoading(false);
@@ -64,7 +63,7 @@ const Library: React.FC = () => {
       <h1>{`${user?.username}'s Library`}</h1>
       <div className="library-grid">
         {library.length === 0 ? ( <p>No games in library</p> ) : 
-          library.map((game: GameWithHeader) => 
+          library.map((game) => 
             <LibraryItem key={game.appid} game={game} /> 
           )}        
       </div>
