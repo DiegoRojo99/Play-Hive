@@ -47,7 +47,7 @@
 - **Frontend**: React + TypeScript + CSS
 - **Backend**: Node.js with Express + Typescript
 - **Database**: PostgreSQL (with Prisma ORM)
-- **Authentication**: Steam OAuth + Firebase Authentication
+- **Authentication**: Steam OAuth + Supabase Authentication
 - **Hosting**: Vercel for frontend, Railway/Render for backend
 
 ---
