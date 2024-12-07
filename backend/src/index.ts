@@ -54,5 +54,5 @@ app.use('/api/steam', steamRoutes);
 app.use('/api/games', gameRoutes)
 
 app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
+  console.log(`Server running on ${process.env.RAILWAY_PUBLIC_DOMAIN}:${PORT}`);
 });
