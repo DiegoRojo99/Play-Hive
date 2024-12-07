@@ -1,28 +1,37 @@
-import React from 'react';
+import React, { useState } from 'react';
 import UserProfile from './UserProfile';
-// import SteamLoginButton from '../buttons/SteamLoginButton';
 import { useUser } from '../../contexts/UserContext';
 import { Link } from 'react-router-dom';
 import './Nav.css';
 
 const NavBar: React.FC = () => {
   const { user } = useUser();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
 
   return (
     <nav className="navbar">
       <div className="navbar-left">
-        <span className="navbar-title">Play Hive</span>
+        <Link to="/" className="navbar-title">
+          Play Hive
+        </Link>
       </div>
-      <div className="navbar-links">
-        <Link to="/browser">Browser</Link>
-        {user ? <Link to="/library">Library</Link> : <></>}
-        <Link to="/login">Login</Link>
+      <div className={`navbar-links ${isMenuOpen ? 'open' : ''}`}>
+        <Link to="/browser" className="navbar-link">Browser</Link>
+        {/* {user && <Link to="/library" className="navbar-link">Library</Link>} */}
+        {user && !isMenuOpen ? (
+          <UserProfile user={user} />
+        ) : (
+          <Link to="/login" className="navbar-link">Login</Link>
+        )}
       </div>
-      <div className="navbar-right">
-        {user ? <UserProfile user={user} /> : 
-        <></>
-        // <SteamLoginButton />
-        }
+      <div className="hamburger" onClick={toggleMenu}>
+        <div></div>
+        <div></div>
+        <div></div>
       </div>
     </nav>
   );
