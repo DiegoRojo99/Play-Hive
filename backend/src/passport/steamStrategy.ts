@@ -6,7 +6,7 @@ import { supabase } from '../db/supabase';
 dotenv.config();
 
 const steamApiKey = process.env.STEAM_API_KEY;
-const baseURL = process.env.RAILWAY_PUBLIC_DOMAIN;
+const baseURL = process.env.FRONTEND_URL;
 if (!steamApiKey) {
   throw new Error('STEAM_API_KEY is not defined in the .env file');
 }
@@ -17,8 +17,8 @@ if(!baseURL){
 passport.use(
   new SteamStrategy(
     {
-      returnURL: `${process.env.RAILWAY_PUBLIC_DOMAIN}/auth/steam/return`,
-      realm: `${process.env.RAILWAY_PUBLIC_DOMAIN}/`,
+      returnURL: `${baseURL}/auth/steam/return`,
+      realm: `${baseURL}/`,
       apiKey: steamApiKey,
     },
     async (identifier: string, profile: any, done: Function) => {
