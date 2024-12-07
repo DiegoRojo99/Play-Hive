@@ -118,11 +118,27 @@ type Genre = {
   descriptions: string,
 }
 
+type SupabaseUser = {
+  id: string;
+  email: string | null;
+  phone: string | null;
+  created_at: string;
+  last_sign_in_at: string | null;
+  app_metadata: {
+    provider: string;
+    [key: string]: any;
+  };
+  user_metadata: {
+    [key: string]: any;
+  };
+  role: string;
+};
 
 export type {
   SteamUser,
   Game,
   GameWithHeader,
   GameWithDetails,
-  GameDB
+  GameDB,
+  SupabaseUser
 }

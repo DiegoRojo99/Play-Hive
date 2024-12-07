@@ -1,12 +1,14 @@
 import React, { createContext, useState, useEffect, useContext, ReactNode } from 'react';
-import { SteamUser } from '../types/Types';
+import { supabase } from '../services/supabaseClient';
+import { SupabaseUser } from '../types/Types';
 
 interface UserContextType {
-  user: SteamUser | null;
-  setUser: React.Dispatch<React.SetStateAction<SteamUser | null>>;
+  user: SupabaseUser | null;
+  setUser: React.Dispatch<React.SetStateAction<SupabaseUser | null>>;
 }
 
 const UserContext = createContext<UserContextType | undefined>(undefined);
+
 export const useUser = (): UserContextType => {
   const context = useContext(UserContext);
   if (!context) {
@@ -16,16 +18,30 @@ export const useUser = (): UserContextType => {
 };
 
 export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [user, setUser] = useState<SteamUser | null>(null);
+  const [user, setUser] = useState<SupabaseUser | null>(null);
 
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_API_BASE_URL}/api/user`, {
-      method: 'GET',
-      credentials: 'include',
-    })
-      .then((response) => response.json())
-      .then((data) => setUser(data.steamID))
-      .catch((err) => setUser(null));
+    const fetchSession = async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (session) {
+        setUser(session.user as SupabaseUser);
+      }
+    };
+
+    fetchSession();
+
+    const { data } = supabase.auth.onAuthStateChange((event, session) => {
+      if (session) {
+        setUser(session.user as SupabaseUser);
+      } else {
+        setUser(null);
+      }
+    });
+
+    return () => {
+      data.subscription?.unsubscribe();
+    };
+
   }, []);
 
   return (

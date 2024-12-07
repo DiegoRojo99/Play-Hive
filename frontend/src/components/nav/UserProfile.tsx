@@ -1,30 +1,64 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import { SupabaseUser } from '../../types/Types';
+import { useNavigate } from 'react-router-dom';
+import './UserProfile.css';
+import { supabase } from '../../services/supabaseClient';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUser } from '@fortawesome/free-solid-svg-icons';
 
-interface User {
-  steamID: string;
-  username: string;
-  avatar: string;
-}
+const UserProfile: React.FC<{user: SupabaseUser | null}> = ({ user }) => {
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null); 
+  const navigate = useNavigate();
 
-const UserProfile: React.FC<{user: User | null}> = ({ user }) => {
-  if(user){
-    return (
-      <a style={{textDecoration: 'none', color: 'inherit'}} href={`${process.env.FRONTEND_URL}/library`}>
-      <div style={{ display: 'flex', alignItems: 'center', width: 'fit-content', marginRight: '16px' }}>
-        <span>{user.username}</span>
-        {user.avatar ? 
-          <img
-            src={user.avatar}
-            alt="User Avatar"
-            className="avatar"
-            style={{marginLeft: '8px', height: '40px', borderRadius: '8px'}}
-          /> 
-        : <></> }
-      </div>
-      </a>
-    );
-  };  
-  return <></>;
+  const toggleDropdown = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setIsDropdownOpen((prev) => !prev);
+  };
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener('click', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, []);
+
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
+    navigate('/login');
+  };
+
+  // const handleSettings = () => {
+  //   navigate('/settings');
+  // };
+
+  return (
+    <div className="user-profile" onClick={toggleDropdown}>
+      <span className="user-name">{user?.user_metadata?.name}</span>
+      {user?.user_metadata?.avatar_url ? 
+        <img
+          src={user?.user_metadata?.avatar_url}
+          alt="User Avatar"
+          className="avatar"
+        /> 
+        :
+        <FontAwesomeIcon icon={faUser} />
+      }
+      {isDropdownOpen && (
+        <div className="dropdown-menu" ref={dropdownRef}>
+          {/* <button className="dropdown-item" onClick={handleSettings}>Settings</button> */}
+          <button className="dropdown-item" onClick={handleLogout}>Log Out</button>
+        </div>
+      )}
+    </div>
+  );
 };
 
 export default UserProfile;
