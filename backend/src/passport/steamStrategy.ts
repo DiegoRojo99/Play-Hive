@@ -5,19 +5,19 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const steamApiKey = process.env.STEAM_API_KEY;
-const baseURL = process.env.BASE_URL;
+const baseURL = process.env.RAILWAY_PUBLIC_DOMAIN;
 if (!steamApiKey) {
   throw new Error('STEAM_API_KEY is not defined in the .env file');
 }
 if(!baseURL){
-  throw new Error('STEAM_RETURN_URL is not defined in the .env file');  
+  throw new Error('RAILWAY_PUBLIC_DOMAIN is not defined in the .env file');  
 }
 
 passport.use(
   new SteamStrategy(
     {
-      returnURL: `${process.env.BASE_URL}/auth/steam/return`,
-      realm: `${process.env.BASE_URL}/`,
+      returnURL: `${process.env.RAILWAY_PUBLIC_DOMAIN}/auth/steam/return`,
+      realm: `${process.env.RAILWAY_PUBLIC_DOMAIN}/`,
       apiKey: steamApiKey,
     },
     (identifier: string, profile: any, done: Function) => {
