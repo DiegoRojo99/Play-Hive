@@ -16,6 +16,7 @@ const NavBar: React.FC = () => {
       <div className="navbar-links">
         <Link to="/browser">Browser</Link>
         {user ? <Link to="/library">Library</Link> : <></>}
+        <Link to="/login">Login</Link>
       </div>
       <div className="navbar-right">
         {user ? <UserProfile user={user} /> : <SteamLoginButton />}

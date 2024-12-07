@@ -41,6 +41,13 @@
   gap: 16px;
 }
 
+.game-browser-loading{
+  height: 50vw;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 .game-cards {
   width: 100%;
