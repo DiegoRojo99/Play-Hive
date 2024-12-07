@@ -35,9 +35,9 @@ const UserProfile: React.FC<{user: SupabaseUser | null}> = ({ user }) => {
     navigate('/login');
   };
 
-  const handleSettings = () => {
-    navigate('/settings');
-  };
+  // const handleSettings = () => {
+  //   navigate('/settings');
+  // };
 
   return (
     <div className="user-profile" onClick={toggleDropdown}>
@@ -53,7 +53,7 @@ const UserProfile: React.FC<{user: SupabaseUser | null}> = ({ user }) => {
       }
       {isDropdownOpen && (
         <div className="dropdown-menu" ref={dropdownRef}>
-          <button className="dropdown-item" onClick={handleSettings}>Settings</button>
+          {/* <button className="dropdown-item" onClick={handleSettings}>Settings</button> */}
           <button className="dropdown-item" onClick={handleLogout}>Log Out</button>
         </div>
       )}
