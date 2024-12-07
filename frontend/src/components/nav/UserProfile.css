@@ -3,6 +3,14 @@
   align-items: center;
   gap: 8px;
   margin-right: 16px;
+  padding: 4px;
+  position: relative;
+}
+
+.user-profile:hover {
+  background-color: #34495e;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
 .user-name {
@@ -13,8 +21,37 @@
 }
 
 .avatar {
-  width: 40px;
-  height: 40px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
   object-fit: cover;
+}
+
+
+
+.dropdown-menu {
+  position: absolute;
+  top: 37px;
+  right: 0;
+  background-color: #333;
+  color: white;
+  border-radius: 8px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
+  width: 150px;
+  z-index: 10;
+}
+
+.dropdown-item {
+  background-color: #333;
+  padding: 12px;
+  border: none;
+  text-align: left;
+  width: 100%;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.dropdown-item:hover {
+  background-color: #555;
 }
