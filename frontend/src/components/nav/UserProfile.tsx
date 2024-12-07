@@ -9,7 +9,7 @@ interface User {
 const UserProfile: React.FC<{user: User | null}> = ({ user }) => {
   if(user){
     return (
-      <a style={{textDecoration: 'none', color: 'inherit'}} href='http://localhost:3000/library'>
+      <a style={{textDecoration: 'none', color: 'inherit'}} href={`${process.env.FRONTEND_URL}/library`}>
       <div style={{ display: 'flex', alignItems: 'center', width: 'fit-content', marginRight: '16px' }}>
         <span>{user.username}</span>
         {user.avatar ? 
