@@ -1,6 +1,6 @@
 import React from 'react';
 import UserProfile from './UserProfile';
-import SteamLoginButton from '../buttons/SteamLoginButton';
+// import SteamLoginButton from '../buttons/SteamLoginButton';
 import { useUser } from '../../contexts/UserContext';
 import { Link } from 'react-router-dom';
 import './Nav.css';
@@ -19,7 +19,10 @@ const NavBar: React.FC = () => {
         <Link to="/login">Login</Link>
       </div>
       <div className="navbar-right">
-        {user ? <UserProfile user={user} /> : <SteamLoginButton />}
+        {user ? <UserProfile user={user} /> : 
+        <></>
+        // <SteamLoginButton />
+        }
       </div>
     </nav>
   );
