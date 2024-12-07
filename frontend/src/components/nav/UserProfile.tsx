@@ -1,30 +1,20 @@
 import React from 'react';
+import { SupabaseUser } from '../../types/Types';
+import './UserProfile.css';
 
-interface User {
-  steamID: string;
-  username: string;
-  avatar: string;
-}
-
-const UserProfile: React.FC<{user: User | null}> = ({ user }) => {
-  if(user){
-    return (
-      <a style={{textDecoration: 'none', color: 'inherit'}} href={`${process.env.FRONTEND_URL}/library`}>
-      <div style={{ display: 'flex', alignItems: 'center', width: 'fit-content', marginRight: '16px' }}>
-        <span>{user.username}</span>
-        {user.avatar ? 
-          <img
-            src={user.avatar}
-            alt="User Avatar"
-            className="avatar"
-            style={{marginLeft: '8px', height: '40px', borderRadius: '8px'}}
-          /> 
-        : <></> }
-      </div>
-      </a>
-    );
-  };  
-  return <></>;
+const UserProfile: React.FC<{user: SupabaseUser | null}> = ({ user }) => {
+  return (
+    <div className="user-profile">
+      <span className="user-name">{user?.user_metadata?.name}</span>
+      {user?.user_metadata?.avatar_url && 
+        <img
+          src={user?.user_metadata?.avatar_url}
+          alt="User Avatar"
+          className="avatar"
+        /> 
+      }
+    </div>
+  );
 };
 
 export default UserProfile;

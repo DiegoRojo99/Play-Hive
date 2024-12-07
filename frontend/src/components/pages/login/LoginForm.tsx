@@ -2,21 +2,25 @@ import React, { useState } from 'react';
 import { supabase } from '../../../services/supabaseClient';
 import { faGoogle } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useUser } from '../../../contexts/UserContext';
 
 const LoginForm: React.FC<{ onSwitchToSignUp: () => void }> = ({ onSwitchToSignUp }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-
+  const { setUser } = useUser();
+  
   const handleEmailLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     setError(null);
 
     try {
-      const { error } = await supabase.auth.signInWithPassword({ email, password });
+      const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+      const user = data.user;
       if (error) throw error;
+      setUser(user as any);
     } catch (err: any) {
       setError(err.message);
     } finally {
@@ -64,7 +68,7 @@ const LoginForm: React.FC<{ onSwitchToSignUp: () => void }> = ({ onSwitchToSignU
           Google
         </button>
       </div>
-      <p onClick={onSwitchToSignUp} className='login-form-toggle'>
+      <p onClick={onSwitchToSignUp} className="login-form-toggle">
         Don't have an account?
       </p>
     </div>
