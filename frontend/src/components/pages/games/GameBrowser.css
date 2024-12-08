@@ -7,6 +7,7 @@
   padding: 16px;
   border-right: 1px solid #ddd;
   overflow-y: auto;
+  min-height: 90vh;
 }
 
 .game-browser-main {
@@ -127,13 +128,19 @@
   }
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 465px) {
   .game-grid {
     width: calc(100vw - 32px);
   }
   .game-cards {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(128px, 1fr));
+    gap: 8px;
+  }
+  
+  .game-browser-grid {
+    display: flex;
+    flex-direction: column;
     gap: 8px;
   }
 }
