@@ -1,18 +1,20 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronRight, faChevronDown } from "@fortawesome/free-solid-svg-icons";
-import './SidebarFilter.css';
+import { faChevronRight, faChevronDown, faTimes } from "@fortawesome/free-solid-svg-icons";
+import "./SidebarFilter.css";
 import { genres } from "../../../data/Genres";
 
 type SidebarFilterProps = {
+  onSearch: (searchTerm: string) => void;
   onFiltersChange: (selectedFilters: { [key: string]: string[] }) => void;
 };
 
-const SidebarFilter: React.FC<SidebarFilterProps> = ({ onFiltersChange }) => {
+const SidebarFilter: React.FC<SidebarFilterProps> = ({ onSearch, onFiltersChange }) => {
   const [openFilter, setOpenFilter] = useState<string | null>("Genre");
   const [selectedOptions, setSelectedOptions] = useState<{ [key: string]: string[] }>({
     Genre: [],
   });
+  const [searchTerm, setSearchTerm] = useState<string>("");
 
   const toggleFilter = (filterName: string) => {
     setOpenFilter(openFilter === filterName ? null : filterName);
@@ -32,12 +34,37 @@ const SidebarFilter: React.FC<SidebarFilterProps> = ({ onFiltersChange }) => {
     });
   };
 
+  const clearSearch = () => {
+    setSearchTerm("");
+    onSearch("");
+  };
+
+  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value;
+    setSearchTerm(value);
+    onSearch(value);
+  };
+
   const filters: Record<string, string[]> = {
-    Genre: genres
+    Genre: genres,
   };
 
   return (
     <aside className="sidebar-filters">
+      <div className="search-bar-container">
+        <input
+          type="text"
+          value={searchTerm}
+          onChange={handleSearchChange}
+          placeholder="Search games..."
+          className="search-bar"
+        />
+        {searchTerm && (
+          <span className="clear-button" onClick={clearSearch}>
+            <FontAwesomeIcon icon={faTimes} />
+          </span>
+        )}
+      </div>
       {Object.keys(filters).map((filter) => (
         <div key={filter} className="filter-section">
           <div className="filter-header" onClick={() => toggleFilter(filter)}>

@@ -1,10 +1,10 @@
 .sidebar-filters {
-  padding: 16px;
+  padding: 0px 16px;
   border-right: 1px solid #ddd;
 }
 
 .filter-section {
-  margin-bottom: 16px;
+  margin: 8px 0;
 }
 
 .filter-header {
@@ -48,4 +48,75 @@
   padding: 0;
   font-size: 0.9rem;
   color: #555;
+}
+
+.search-bar-container {
+  position: relative;
+  width: 100%;
+  padding: 4px;
+}
+
+.search-bar {
+  width: 100%;
+  padding-right: 2.5rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  outline: none;
+  box-sizing: border-box;
+  padding: 4px;
+}
+
+.clear-button {
+  position: absolute;
+  top: 50%;
+  right: 0.75rem;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #999;
+}
+
+.clear-button:hover {
+  color: #000;
+}
+
+
+@media screen and (max-width: 720px) {
+  .sidebar-filters {
+    padding: 0 12px;
+  }
+  .filter-options label {
+    font-size: 14px;
+  }
+}
+@media screen and (max-width: 600px) {
+  .sidebar-filters {
+    padding: 0 10px;
+  }
+  .filter-options label {
+    font-size: 12px;
+  }
+}
+@media screen and (max-width: 480px) {
+  .sidebar-filters {
+    padding: 0 4px;
+  }
+  .filter-options label {
+    font-size: 10px;
+  }
+}
+@media screen and (max-width: 400px) {
+  .sidebar-filters {
+    padding: 0 2px;
+  }
+  .filter-options label {
+    font-size: 8px;
+  }
+  .filter-options input {
+    margin-right: 4px;
+  }
+  .selected-options{
+    font-size: 10px;
+    padding-right: 4px;
+  }
 }

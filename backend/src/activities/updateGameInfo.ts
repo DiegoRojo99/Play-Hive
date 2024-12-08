@@ -89,5 +89,9 @@ const getGamesWithNullDescriptions = async () => {
   }
 };
 
-getGamesWithNullDescriptions();
-updateGamesWithNullDescriptions(5000);
+async function runUpdate(){
+  await getGamesWithNullDescriptions();
+  updateGamesWithNullDescriptions(5000);
+}
+
+runUpdate();
