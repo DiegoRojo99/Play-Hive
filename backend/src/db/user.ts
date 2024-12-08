@@ -19,6 +19,9 @@ const insertSteamProfile = async (profile: SteamProfile): Promise<any> => {
 
 const fetchSteamProfile = async (userId: string): Promise<SteamProfile | null> => {
   try {
+    if(!userId){
+      throw new Error("User id is missing");
+    }
     let result = await prisma.steamProfile.findFirst({
       where: {
         userId: userId
@@ -26,7 +29,7 @@ const fetchSteamProfile = async (userId: string): Promise<SteamProfile | null> =
     });
     return result;
   } catch (error) {
-    console.error('Error saving Steam profile to database:', error);
+    console.error('Error fetching Steam profile to database:', error);
     throw error;
   }
 };

@@ -3,12 +3,15 @@ import { fetchSteamProfile } from '../db/user';
 
 const router = express.Router();
 
-router.get('/steamProfile', async (req: Request, res: Response) : Promise<any> => {
+router.get('/steamProfile/:userId', async (req: Request, res: Response) : Promise<any> => {
   const { userId } = req.params;
   try {
+    if(!userId){
+      throw new Error("User id is missing");
+    }
     const data = await fetchSteamProfile(userId);
     if (!data) {
-      throw new Error('Failed to fetch user data');
+      return res.status(404).json({ message: "No Steam profile found" });
     }
     res.json(data);
   } 
