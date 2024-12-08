@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronRight, faChevronDown } from "@fortawesome/free-solid-svg-icons";
+import { faChevronRight, faChevronDown, faTimes } from "@fortawesome/free-solid-svg-icons";
 import "./SidebarFilter.css";
 import { genres } from "../../../data/Genres";
 
@@ -34,10 +34,15 @@ const SidebarFilter: React.FC<SidebarFilterProps> = ({ onSearch, onFiltersChange
     });
   };
 
+  const clearSearch = () => {
+    setSearchTerm("");
+    onSearch("");
+  };
+
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
     setSearchTerm(value);
-    onSearch(value); // Pass the search term to the parent component
+    onSearch(value);
   };
 
   const filters: Record<string, string[]> = {
@@ -49,11 +54,16 @@ const SidebarFilter: React.FC<SidebarFilterProps> = ({ onSearch, onFiltersChange
       <div className="search-bar-container">
         <input
           type="text"
-          className="search-bar"
-          placeholder="Search by name"
           value={searchTerm}
           onChange={handleSearchChange}
+          placeholder="Search games..."
+          className="search-bar"
         />
+        {searchTerm && (
+          <span className="clear-button" onClick={clearSearch}>
+            <FontAwesomeIcon icon={faTimes} />
+          </span>
+        )}
       </div>
       {Object.keys(filters).map((filter) => (
         <div key={filter} className="filter-section">
