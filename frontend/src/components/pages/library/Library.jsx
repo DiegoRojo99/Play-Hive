@@ -46,7 +46,6 @@ const Library = () => {
       try {
         const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/api/user/steamProfile/${user.id}`);
         if (!response.ok) {
-          console.log("Response Status: ", response.status);
           if (response.status === 404) {
             setShowSteamLoginButton(true);
             setLoading(false);
