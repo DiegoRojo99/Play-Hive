@@ -4,17 +4,21 @@ import { faChevronRight, faChevronDown, faTimes } from "@fortawesome/free-solid-
 import "./SidebarFilter.css";
 import { genres } from "../../../data/Genres";
 
+type filters = { 
+  [key: string]: string[] 
+}
+
 type SidebarFilterProps = {
   onSearch: (searchTerm: string) => void;
-  onFiltersChange: (selectedFilters: { [key: string]: string[] }) => void;
+  onFiltersChange: (selectedFilters: filters ) => void;
 };
 
 const SidebarFilter: React.FC<SidebarFilterProps> = ({ onSearch, onFiltersChange }) => {
   const [openFilter, setOpenFilter] = useState<string | null>("Genre");
-  const [selectedOptions, setSelectedOptions] = useState<{ [key: string]: string[] }>({
+  const [searchTerm, setSearchTerm] = useState<string>("");
+  const [selectedOptions, setSelectedOptions] = useState<filters>({
     Genre: [],
   });
-  const [searchTerm, setSearchTerm] = useState<string>("");
 
   const toggleFilter = (filterName: string) => {
     setOpenFilter(openFilter === filterName ? null : filterName);
