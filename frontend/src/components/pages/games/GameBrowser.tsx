@@ -43,11 +43,7 @@ const GameBrowser: React.FC = () => {
         <SidebarFilter onFiltersChange={setFilters} />
       </aside>
       <section className="game-browser-main">
-        {loading ? (
-          <div className="game-browser-loading">
-            <Loader />
-          </div>
-        ) : (
+        {loading ? ( <Loader /> ) : (
           <>
             <div className="game-browser-options">
               <h2>Games</h2>

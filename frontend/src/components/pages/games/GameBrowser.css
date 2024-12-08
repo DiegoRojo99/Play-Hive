@@ -41,7 +41,7 @@
   gap: 16px;
 }
 
-.game-browser-loading{
+.loading-container{
   height: 50vw;
   width: 100%;
   display: flex;
