@@ -12,8 +12,13 @@ const router = express.Router();
 router.post('/:listId/games/:gameId', async (req: Request, res: Response): Promise<any> => {
   try {
     const { listId, gameId } = req.params;
-    const updatedList = await addGameToList(listId, Number(gameId));
-    res.json(updatedList);
+    if(Number.isNaN(Number(gameId))){
+      res.status(400).send("Game id should be a number");
+    }
+    else{
+      const updatedList = await addGameToList(listId, Number(gameId));
+      res.json(updatedList);
+    }
   } catch (error) {
     console.error("Error adding game to list:", error);
     res.status(500).send("Internal Server Error");
@@ -23,8 +28,13 @@ router.post('/:listId/games/:gameId', async (req: Request, res: Response): Promi
 router.delete('/:listId/games/:gameId', async (req: Request, res: Response): Promise<any> => {
   try {
     const { listId, gameId } = req.params;
-    const updatedList = await removeGameFromList(listId, Number(gameId));
-    res.json(updatedList);
+    if(Number.isNaN(Number(gameId))){
+      res.status(400).send("Game id should be a number");
+    }
+    else{
+      const updatedList = await removeGameFromList(listId, Number(gameId));
+      res.json(updatedList);
+    }
   } catch (error) {
     console.error("Error removing game from list:", error);
     res.status(500).send("Internal Server Error");
