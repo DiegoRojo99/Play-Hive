@@ -27,8 +27,9 @@ model Genre {
   games               Game[]      @relation("GameGenres")
 }
 
-model Profile {
+model SteamProfile {
   userId      String      @id
   steamId     String?
   avatarUrl   String?
+  username    String?
 }

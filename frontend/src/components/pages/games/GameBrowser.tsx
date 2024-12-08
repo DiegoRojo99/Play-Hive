@@ -18,7 +18,6 @@ const GameBrowser: React.FC = () => {
         }
       });
 
-      console.log("REACT_APP_API_BASE_URL: ", process.env.REACT_APP_API_BASE_URL)
       const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/api/games?${params.toString()}`);
       if(!response.ok){
         throw new Error("Could not get data");

@@ -8,8 +8,9 @@
     "skipLibCheck": true,
     "resolveJsonModule": true,
     "strict": true,
-    "noImplicitAny": true
+    "noImplicitAny": true,
+    "allowJs": true
   },
-  "include": ["src/**/*.ts"],
+  "include": ["src/**/*.ts", "src/routes/authRoutes.js"],
   "exclude": ["node_modules"]
 }

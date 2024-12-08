@@ -134,11 +134,24 @@ type SupabaseUser = {
   role: string;
 };
 
+type SteamProfile = {
+  userId: String,
+  steamId: String | null,
+  avatarUrl: String | null,
+  username: String | null,
+};
+
+type CompleteUser = SupabaseUser & {
+  steamProfile: SteamProfile | null;
+};
+
 export type {
   SteamUser,
   Game,
   GameWithHeader,
   GameWithDetails,
   GameDB,
-  SupabaseUser
+  SupabaseUser,
+  SteamProfile,
+  CompleteUser
 }

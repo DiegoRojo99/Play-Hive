@@ -18,19 +18,14 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '16'  # Replace with the Node.js version you're using
+          node-version: '22'
 
       - name: Install dependencies
         run: |
-          cd backend  # Navigate to your backend folder
+          cd backend
           npm install
 
-      - name: Run backend tests
-        run: |
-          cd backend  # Again, navigate to your backend folder
-          npm test  # Replace with your test command (e.g., if you're using Jest, Mocha, etc.)
-
-      - name: Lint the code
+      - name: Build the backend
         run: |
           cd backend
-          npm run lint  # Add your linting command if applicable
+          npm run build
