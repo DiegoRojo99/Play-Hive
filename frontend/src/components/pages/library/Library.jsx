@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useUser } from '../../../contexts/UserContext';
 import LibraryItem from './LibraryItem';
 import './Library.css';
+import SteamLoginButton from '../../buttons/SteamLoginButton';
+import Loader from '../../extras/Loader';
 
 const Library = () => {
   const { user } = useUser();
@@ -9,6 +11,7 @@ const Library = () => {
   const [library, setLibrary] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [showSteamLoginButton, setShowSteamLoginButton] = useState(false);
   
   const fetchLibrary = async (steamId) => {
     try {
@@ -41,9 +44,17 @@ const Library = () => {
   useEffect(() => {
     const fetchUserSteamProfile = async () => {
       try {
-        const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/api/user/steamProfile?userId=${user.userId}`);
+        const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/api/user/steamProfile/${user.id}`);
         if (!response.ok) {
-          throw new Error(`Error: ${response.statusText}`);
+          console.log("Response Status: ", response.status);
+          if (response.status === 404) {
+            setShowSteamLoginButton(true);
+            setLoading(false);
+            return;
+          }
+          else{
+            throw new Error(`Error: ${response.statusText}`);
+          }
         }
         const steamProfile = await response.json();
         setUserSteamProfile(steamProfile);
@@ -61,8 +72,8 @@ const Library = () => {
 
   }, [user]);
 
-  if (loading || !library) {
-    return <div>Loading library...</div>;
+  if ((loading || !library) && !showSteamLoginButton) {
+    return <Loader />;
   }
 
   if (error) {
@@ -71,13 +82,28 @@ const Library = () => {
 
   return (
     <div id="library">
-      <h1>{`${userSteamProfile?.username}'s Library`}</h1>
-      <div className="library-grid">
-        {library.length === 0 ? ( <p>No games in library</p> ) : 
-          library.map((game) => 
-            <LibraryItem key={game.appid} game={game} /> 
-          )}        
-      </div>
+      {userSteamProfile && <>
+        <h1>{`${userSteamProfile?.username}'s Library`}</h1>
+        <div className="library-grid">
+          {library.length === 0 ? ( <p>No games in library</p> ) : 
+            library.map((game) => 
+              <LibraryItem key={game.appid} game={game} /> 
+            )}        
+        </div>
+      </>}
+      {showSteamLoginButton && (
+        <div className="steam-link-container">
+          <div className="steam-link-card">
+            <h2 className="steam-link-heading">No Steam Account Linked</h2>
+            <p className="steam-link-description">
+              It looks like your account isn’t linked to Steam yet. To enjoy personalized Steam-based features, please log in with your Steam account.
+            </p>
+            <div className="steam-link-action">
+              <SteamLoginButton />
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

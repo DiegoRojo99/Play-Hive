@@ -72,3 +72,67 @@
     height: 120px;
   }
 }
+
+/* Steam link button */ 
+.steam-link-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 300px;
+  padding: 16px;
+}
+
+.steam-link-card {
+  max-width: 400px;
+  width: 100%;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  padding: 24px;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.steam-link-heading {
+  font-size: 20px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 12px;
+}
+
+.steam-link-description {
+  font-size: 16px;
+  color: #555;
+  margin-bottom: 20px;
+}
+
+.steam-link-action {
+  margin-top: 20px;
+}
+
+.steam-link-action button {
+  font-size: 16px;
+  padding: 10px 20px;
+  border: none;
+  background-color: #2a475e;
+  color: #fff;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.steam-link-action button:hover {
+  background-color: #1b2838;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

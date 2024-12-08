@@ -21,7 +21,7 @@ const NavBar: React.FC = () => {
       </div>
       <div className={`navbar-links ${isMenuOpen ? 'open' : ''}`}>
         <Link to="/browser" className="navbar-link">Browser</Link>
-        {/* {user && <Link to="/library" className="navbar-link">Library</Link>} */}
+        {user && <Link to="/library" className="navbar-link">Library</Link>}
         {user && !isMenuOpen ? (
           <UserProfile user={user} />
         ) : (
