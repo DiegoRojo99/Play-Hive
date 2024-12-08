@@ -76,4 +76,22 @@ const updateGamesWithNullDescriptions = async (limit: number) => {
   }
 };
 
-updateGamesWithNullDescriptions(500);
+const getGamesWithNullDescriptions = async () => {
+  try {
+    const games = await prisma.game.findMany({
+      where: { description: null },
+      orderBy: { appid: 'asc' },
+    });
+
+    console.log(`Found ${games.length} games with null descriptions.`);
+  } catch (error) {
+    console.error('Error fetching games:', error);
+  }
+};
+
+async function runUpdate(){
+  await getGamesWithNullDescriptions();
+  updateGamesWithNullDescriptions(5000);
+}
+
+runUpdate();
