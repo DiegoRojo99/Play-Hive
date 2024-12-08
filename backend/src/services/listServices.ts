@@ -18,10 +18,10 @@ export const addGameToList = async (listId: string, gameId: number): Promise<boo
         },
       },
     });
-    return true; // Success
+    return true;
   } catch (error) {
     console.error(error);
-    return false; // Failure
+    return false;
   }
 };
 
@@ -41,10 +41,10 @@ export const removeGameFromList = async (listId: string, gameId: number): Promis
         },
       },
     });
-    return true; // Success
+    return true;
   } catch (error) {
     console.error(error);
-    return false; // Failure
+    return false;
   }
 };
 
