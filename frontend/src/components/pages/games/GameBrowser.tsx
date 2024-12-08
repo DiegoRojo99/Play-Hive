@@ -48,7 +48,7 @@ const GameBrowser: React.FC = () => {
             <div className="game-browser-options">
               <h2>Games</h2>
             </div>
-            <div className="game-browser-grid">
+            <div className="game-cards">
               {games.map((game) => (
                 <GameCard key={game.appid} game={game} />
               ))}
