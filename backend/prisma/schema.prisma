@@ -19,6 +19,7 @@ model Game {
   releaseDate         DateTime? 
   backgroundImage     String? 
   genres              Genre[]     @relation("GameGenres")
+  customLists         List[]      @relation("GameLists")  
 }
 
 model Genre {
@@ -32,4 +33,14 @@ model SteamProfile {
   steamId     String?
   avatarUrl   String?
   username    String?
+}
+
+model List {
+  id           String      @id @default(uuid())
+  name         String
+  description  String?
+  userId       String
+  games        Game[]      @relation("GameLists")
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
 }
