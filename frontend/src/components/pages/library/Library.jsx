@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useUser } from '../../../contexts/UserContext';
-import LibraryItem from './LibraryItem';
 import './Library.css';
 import SteamLoginButton from '../../buttons/SteamLoginButton';
 import Loader from '../../extras/Loader';
+import LibraryCollection from './LibraryCollection';
 
 const Library = () => {
   const { user } = useUser();
@@ -81,15 +81,7 @@ const Library = () => {
 
   return (
     <div id="library">
-      {userSteamProfile && <>
-        <h1>{`${userSteamProfile?.username}'s Library`}</h1>
-        <div className="library-grid">
-          {library.length === 0 ? ( <p>No games in library</p> ) : 
-            library.map((game) => 
-              <LibraryItem key={game.appid} game={game} /> 
-            )}        
-        </div>
-      </>}
+      {userSteamProfile && <LibraryCollection games={library} name='Library' />}
       {showSteamLoginButton && (
         <div className="steam-link-container">
           <div className="steam-link-card">
