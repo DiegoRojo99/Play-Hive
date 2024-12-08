@@ -49,3 +49,43 @@
   font-size: 0.9rem;
   color: #555;
 }
+
+@media screen and (max-width: 720px) {
+  .sidebar-filters {
+    padding: 12px;
+  }
+  .filter-options label {
+    font-size: 14px;
+  }
+}
+@media screen and (max-width: 600px) {
+  .sidebar-filters {
+    padding: 10px;
+  }
+  .filter-options label {
+    font-size: 12px;
+  }
+}
+@media screen and (max-width: 480px) {
+  .sidebar-filters {
+    padding: 4px;
+  }
+  .filter-options label {
+    font-size: 10px;
+  }
+}
+@media screen and (max-width: 400px) {
+  .sidebar-filters {
+    padding: 2px;
+  }
+  .filter-options label {
+    font-size: 8px;
+  }
+  .filter-options input {
+    margin-right: 4px;
+  }
+  .selected-options{
+    font-size: 10px;
+    padding-right: 4px;
+  }
+}
