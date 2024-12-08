@@ -51,7 +51,7 @@ const GameBrowser: React.FC = () => {
   useEffect(() => {
     const handler = setTimeout(() => {
       setDebouncedSearchTerm(searchTerm);
-    }, 800);
+    }, 1000);
 
     return () => {
       clearTimeout(handler);
