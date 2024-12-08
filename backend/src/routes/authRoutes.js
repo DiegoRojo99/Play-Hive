@@ -6,7 +6,6 @@ const router = Router();
 // Route for Steam authentication with fallback
 router.get('/steam', (req, res, next) => {
   const { supabaseUserId } = req.query;
-  console.log("Query")
   if (!supabaseUserId) {
     return res.status(400).json({ error: 'Supabase user ID is required' });
   }
