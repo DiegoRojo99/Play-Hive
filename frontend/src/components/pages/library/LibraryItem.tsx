@@ -22,7 +22,7 @@ const LibraryItem: React.FC<LibraryItemProps> = ({game}) => {
           loading="lazy"
         />
         <p className='library-item-text'>{game.name}</p>
-        {playtime && <p className='library-item-text'>{playtime} hours played</p>}
+        {playtime !== null && <p className='library-item-text'>{playtime} hours played</p>}
       </div>
     </Link>
   );
