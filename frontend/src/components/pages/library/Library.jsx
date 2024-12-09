@@ -125,7 +125,7 @@ const Library = () => {
       </div>
       {userSteamProfile && <LibraryCollection games={library} name="Library" />}
       {userLists.map((list) => (
-        <LibraryCollection key={list.id} games={list.games} name={list.name} />
+        <LibraryCollection key={list.id} games={list.games} name={list.name} refresh={fetchUserLists} list={list} />
       ))}
       {showSteamLoginButton && (
         <div className="steam-link-container">
