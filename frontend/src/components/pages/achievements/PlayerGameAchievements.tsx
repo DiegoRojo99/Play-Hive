@@ -4,10 +4,11 @@ import { useParams } from 'react-router-dom';
 import Loader from '../../extras/Loader';
 import './Achievements.css';
 import CircularProgress from '../../extras/CircularProgress';
+import { GameAchievement, UserAchievement } from '../../../types/Types';
 
 const PlayerGameAchievements = () => {
-  const [gameAchievements, setGameAchievements] = useState<any[]>([]);
-  const [userAchievements, setUserAchievements] = useState<any[]>([]);
+  const [gameAchievements, setGameAchievements] = useState<GameAchievement[]>([]);
+  const [userAchievements, setUserAchievements] = useState<UserAchievement[]>([]);
   const [gameName, setGameName] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -16,9 +17,9 @@ const PlayerGameAchievements = () => {
   const { user } = useUser();
   const { gameId } = useParams();
 
-  const calculateAchievementPct = (achievements: any) => {
+  const calculateAchievementPct = (achievements: UserAchievement[]) => {
     const totalAchievements = achievements.length;
-    const unlockedAchievements = achievements.filter((achievement: { achieved: any; }) => achievement.achieved).length;
+    const unlockedAchievements = achievements.filter((achievement) => achievement.achieved).length;
     if (totalAchievements === 0) return 0;
     return (unlockedAchievements / totalAchievements) * 100;
   };
