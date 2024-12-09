@@ -33,10 +33,10 @@ const LibraryCollection: React.FC<LibraryItemProps> = ({games, name, refresh, li
         <div className="library-grid">
           {games.map( game => <LibraryItem key={game.appid} game={game} />)}
           {list &&
-            <div className="library-item empty-game" key="empty-game">
+            <div className="library-item empty-game" key="empty-game" onClick={toggleModal} >
               <div className="empty-game-content">
                 <div className="empty-game-message">
-                  <FontAwesomeIcon icon={faSquarePlus} onClick={toggleModal} />              
+                  <FontAwesomeIcon icon={faSquarePlus}/>              
                 </div>
               </div>
             </div>
