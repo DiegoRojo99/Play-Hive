@@ -3,6 +3,7 @@ import { useUser } from '../../../contexts/UserContext';
 import { useParams } from 'react-router-dom';
 import Loader from '../../extras/Loader';
 import './Achievements.css';
+import CircularProgress from '../../extras/CircularProgress';
 
 const PlayerGameAchievements = () => {
   const [gameAchievements, setGameAchievements] = useState<any[]>([]);
@@ -10,9 +11,17 @@ const PlayerGameAchievements = () => {
   const [gameName, setGameName] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+  const [userCompletionPct, setUserCompletionPct] = useState<number>(0);
 
   const { user } = useUser();
   const { gameId } = useParams();
+
+  const calculateAchievementPct = (achievements: any) => {
+    const totalAchievements = achievements.length;
+    const unlockedAchievements = achievements.filter((achievement: { achieved: any; }) => achievement.achieved).length;
+    if (totalAchievements === 0) return 0;
+    return (unlockedAchievements / totalAchievements) * 100;
+  };
 
   useEffect(() => {
     const fetchAchievements = async () => {
@@ -41,6 +50,8 @@ const PlayerGameAchievements = () => {
         const { gameAchievements, userAchievements, gameName } = await achievementsResponse.json();
         setGameAchievements(gameAchievements);
         setUserAchievements(userAchievements);
+        setUserCompletionPct(calculateAchievementPct(userAchievements));
+        
         setGameName(gameName);
       } catch (err: any) {
         setError(err.message);
@@ -59,7 +70,10 @@ const PlayerGameAchievements = () => {
 
   return (
     <div className="achievements-container">
-      <h1>Achievements for {gameName}</h1>
+      <div className='achievements-user-info'>
+        <h1 className='achievements-game-name'>{gameName}</h1>
+        <CircularProgress percentage={userCompletionPct} />
+      </div>
       <div className="achievements-grid">
         {gameAchievements.map((achievement: any) => {
           const userAchievement = userAchievements.find((ua: any) => ua.apiname === achievement.name);
@@ -73,15 +87,7 @@ const PlayerGameAchievements = () => {
               <div className="achievement-details">
                 <h3>{achievement.displayName}</h3>
                 <p>{achievement.description}</p>
-                {/* <p>Status: {userAchievement?.achieved ? "Unlocked" : "Locked"}</p> */}
               </div>
-              {/* <div className="achievement-unlock-date">                  
-                {userAchievement?.unlocktime !== 0 && (
-                  <p>
-                    Unlocked on: {new Date(userAchievement.unlocktime * 1000).toISOString().replace("T"," ").replace(".000Z","")}
-                  </p>
-                )}
-              </div> */}
             </div>
           );
         })}
