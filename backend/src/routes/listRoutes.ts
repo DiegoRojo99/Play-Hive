@@ -17,10 +17,14 @@ router.post('/:listId/games/:gameId', async (req: Request, res: Response): Promi
     }
     else{
       const updatedList = await addGameToList(listId, Number(gameId));
-      res.json(updatedList);
+      if(updatedList){
+        res.status(201).send();
+      }
+      else{
+        res.status(500).send();
+      }
     }
   } catch (error) {
-    console.error("Error adding game to list:", error);
     res.status(500).send("Internal Server Error");
   }
 });
