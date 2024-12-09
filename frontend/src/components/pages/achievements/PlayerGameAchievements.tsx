@@ -61,27 +61,30 @@ const PlayerGameAchievements = () => {
     <div className="achievements-container">
       <h1>Achievements for {gameName}</h1>
       <div className="achievements-grid">
-        {gameAchievements.map((achievement: any) => (
-          <div className="achievement-card" key={achievement.name}>
-            <img
-              src={achievement.icon}
-              alt={achievement.displayName}
-              className="achievement-icon"
-            />
-            <h3>{achievement.displayName}</h3>
-            <p>{achievement.description}</p>
-            <p>Status: {userAchievements.find((ua: any) => ua.apiname === achievement.name)?.achieved ? "Unlocked" : "Locked"}</p>
-            {userAchievements.find((ua: any) => ua.apiname === achievement.name)?.unlocktime !== 0 && (
-              <p>
-                Unlocked Date:{' '}
-                {new Date(
-                  userAchievements.find((ua: any) => ua.apiname === achievement.name)?.unlocktime *
-                    1000
-                ).toDateString()}
-              </p>
-            )}
-          </div>
-        ))}
+        {gameAchievements.map((achievement: any) => {
+          const userAchievement = userAchievements.find((ua: any) => ua.apiname === achievement.name);
+          return (
+            <div className="achievement-card" key={achievement.name}>
+              <img
+                src={achievement.icon}
+                alt={achievement.displayName}
+                className={`achievement-icon ${userAchievement?.achieved ? '' : 'locked-icon'}`}
+              />
+              <div className="achievement-details">
+                <h3>{achievement.displayName}</h3>
+                <p>{achievement.description}</p>
+                {/* <p>Status: {userAchievement?.achieved ? "Unlocked" : "Locked"}</p> */}
+              </div>
+              {/* <div className="achievement-unlock-date">                  
+                {userAchievement?.unlocktime !== 0 && (
+                  <p>
+                    Unlocked on: {new Date(userAchievement.unlocktime * 1000).toISOString().replace("T"," ").replace(".000Z","")}
+                  </p>
+                )}
+              </div> */}
+            </div>
+          );
+        })}
       </div>
     </div>
   );
