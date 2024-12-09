@@ -2,10 +2,16 @@ import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
-const updateGamesWithNullDescriptions = async (limit: number) => {
+const updateGamesWithNullDescriptions = async (limit: number, name: string) => {
   try {
     const games = await prisma.game.findMany({
-      where: { description: null },
+      where: { 
+        description: null, 
+        name: {
+          contains: name,
+          mode: 'insensitive',
+        }
+      },
       take: limit,
       orderBy: { appid: 'asc' },
     });
@@ -91,7 +97,7 @@ const getGamesWithNullDescriptions = async () => {
 
 async function runUpdate(){
   await getGamesWithNullDescriptions();
-  updateGamesWithNullDescriptions(5000);
+  updateGamesWithNullDescriptions(5000, "soundtrack");
 }
 
 runUpdate();
