@@ -145,6 +145,16 @@ type CompleteUser = SupabaseUser & {
   steamProfile: SteamProfile | null;
 };
 
+type List = {
+  id: String;
+  name: String;
+  description: String | null;
+  userId: String;
+  games: GameDB[];
+  createdAt: Date;
+  updatedAt: Date;
+}
+
 export type {
   SteamUser,
   Game,
@@ -153,5 +163,6 @@ export type {
   GameDB,
   SupabaseUser,
   SteamProfile,
-  CompleteUser
+  CompleteUser,
+  List
 }

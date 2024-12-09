@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useUser } from '../../../contexts/UserContext';
-import LibraryItem from './LibraryItem';
 import './Library.css';
 import SteamLoginButton from '../../buttons/SteamLoginButton';
 import Loader from '../../extras/Loader';
+import LibraryCollection from './LibraryCollection';
 
 const Library = () => {
   const { user } = useUser();
@@ -12,6 +12,8 @@ const Library = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [showSteamLoginButton, setShowSteamLoginButton] = useState(false);
+  const [userLists, setUserLists] = useState([]);
+  const [newListName, setNewListName] = useState("");
   
   const fetchLibrary = async (steamId) => {
     try {
@@ -41,6 +43,37 @@ const Library = () => {
     }
   };
 
+  const fetchUserLists = async () => {
+    try {
+      const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/api/lists/user/${user.id}`);
+      if (!response.ok) {
+        throw new Error(`Error: ${response.statusText}`);
+      }
+      const data = await response.json();
+      setUserLists(data);
+    } catch (err) {
+      setError(err.message);
+    }
+  };
+
+  const createList = async () => {
+    if (!newListName.trim()) return;
+    try {
+      const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/api/lists`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name: newListName, userId: user.id }),
+      });
+      if (!response.ok) {
+        throw new Error(`Error: ${response.statusText}`);
+      }
+      setNewListName("");
+      fetchUserLists();
+    } catch (err) {
+      setError(err.message);
+    }
+  };
+
   useEffect(() => {
     const fetchUserSteamProfile = async () => {
       try {
@@ -51,7 +84,7 @@ const Library = () => {
             setLoading(false);
             return;
           }
-          else{
+          else {
             throw new Error(`Error: ${response.statusText}`);
           }
         }
@@ -63,12 +96,12 @@ const Library = () => {
       } finally {
         setLoading(false);
       }
-    };   
-    
-    if(user){
-      fetchUserSteamProfile();
-    }
+    };
 
+    if (user) {
+      fetchUserSteamProfile();
+      fetchUserLists();
+    }
   }, [user]);
 
   if ((loading || !library) && !showSteamLoginButton) {
@@ -81,15 +114,19 @@ const Library = () => {
 
   return (
     <div id="library">
-      {userSteamProfile && <>
-        <h1>{`${userSteamProfile?.username}'s Library`}</h1>
-        <div className="library-grid">
-          {library.length === 0 ? ( <p>No games in library</p> ) : 
-            library.map((game) => 
-              <LibraryItem key={game.appid} game={game} /> 
-            )}        
-        </div>
-      </>}
+      <div className="create-list">
+        <input
+          type="text"
+          value={newListName}
+          placeholder="Enter list name"
+          onChange={(e) => setNewListName(e.target.value)}
+        />
+        <button onClick={createList}>Create List</button>
+      </div>
+      {userSteamProfile && <LibraryCollection games={library} name="Library" />}
+      {userLists.map((list) => (
+        <LibraryCollection key={list.id} games={list.games} name={list.name} refresh={fetchUserLists} list={list} />
+      ))}
       {showSteamLoginButton && (
         <div className="steam-link-container">
           <div className="steam-link-card">

@@ -9,6 +9,8 @@ import libraryRoutes from './routes/libraryRoutes';
 import steamRoutes from './routes/steamRoutes';
 import gameRoutes from './routes/gameRoutes';
 import userRoutes from './routes/userRoutes';
+import listRoutes from './routes/listRoutes';
+
 import './passport/steamStrategy';
 
 dotenv.config();
@@ -54,6 +56,7 @@ app.use('/api/library', libraryRoutes);
 app.use('/api/steam', steamRoutes);
 app.use('/api/games', gameRoutes);
 app.use('/api/user', userRoutes);
+app.use('/api/lists', listRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server running on ${process.env.BACKEND_URL}`);
