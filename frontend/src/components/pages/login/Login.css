@@ -119,6 +119,7 @@
 }
 
 .error-message {
+  margin: 32px 0;
   color: red;
 }
 
