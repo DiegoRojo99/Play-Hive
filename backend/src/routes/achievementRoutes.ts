@@ -30,7 +30,12 @@ router.get('/:gameId', async (req, res): Promise<any> => {
       gameName,
     });
   } catch (error: any) {
-    res.status(500).json({ error: error.message });
+    if (error.message.includes('Game schema does not contain achievements')) {
+      return res.status(404).json({ error: error.message });
+    }
+    else{
+      res.status(500).json({ error: error.message });
+    }
   }
 });
 

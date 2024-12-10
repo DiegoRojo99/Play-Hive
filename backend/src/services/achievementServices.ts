@@ -45,7 +45,7 @@ export const fetchUserAchievements = async (
 
     if (!response.ok) {
       const error = await response.json();
-      throw new Error(`Failed to fetch user achievements: ${error?.message || response.statusText}`);
+      throw new Error(`${error?.message || response.statusText}`);
     }
 
     const achievementsData = await response.json();
