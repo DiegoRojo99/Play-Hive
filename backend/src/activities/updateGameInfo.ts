@@ -26,7 +26,10 @@ const updateGamesWithNullDescriptions = async (limit: number, name: string) => {
         const response = await fetch(`https://store.steampowered.com/api/appdetails?appids=${appid}`);
         const data = await response.json();
 
-        if (data?.[appid]?.success) {
+        if(!data){
+          console.log("Null Data")
+        }
+        else if (data?.[appid]?.success) {
           const gameData = data[appid].data;
           console.log(`${index}/${games.length}: Updating ${gameData.name} (${appid})`);
 
@@ -67,9 +70,10 @@ const updateGamesWithNullDescriptions = async (limit: number, name: string) => {
               });
             }
           }
-        } else {
+        } 
+        else if (data?.[appid]?.success === false){
           await prisma.game.delete({ where: { appid } });
-          console.log(`Deleted failed API entry: ${appid}`);
+          console.log(`Deleted false success API entry: ${appid}`);
         }
       } catch (error) {
         console.error(`Error processing game ${appid}:`, error);
@@ -96,8 +100,8 @@ const getGamesWithNullDescriptions = async () => {
 };
 
 async function runUpdate(){
-  await getGamesWithNullDescriptions();
-  updateGamesWithNullDescriptions(5000, "soundtrack");
+  // await getGamesWithNullDescriptions();
+  updateGamesWithNullDescriptions(5000, "");
 }
 
 runUpdate();
