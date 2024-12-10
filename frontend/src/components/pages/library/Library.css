@@ -13,6 +13,7 @@
 }
 
 .library-item {
+  position: relative;
   background-color: #fff;
   border: 1px solid gray;
   border-radius: 10px;
@@ -204,4 +205,14 @@
   font-size: 32px;
   font-weight: bold;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+.trophy-icon {
+  position: absolute;
+  bottom: 4px;
+  right: 10px;
+  font-size: 20px;
+  padding: 8px;
+  color: gold;
+  backdrop-filter: blur(10px);
 }
