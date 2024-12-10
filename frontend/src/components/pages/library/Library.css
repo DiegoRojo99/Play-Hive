@@ -215,4 +215,10 @@
   padding: 8px;
   color: gold;
   backdrop-filter: blur(10px);
+  border-radius: 8px;
+  transition: font-size 0.3s ease;
+}
+
+.trophy-icon:hover {
+  font-size: 32px;
 }
