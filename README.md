@@ -17,6 +17,9 @@
 3. **Game Browser**:
    Look up any Steam game by name or filter the Steam library.
 
+4. **Achievement Hunting**  
+   Track your progress for game achievements.
+
 ### 🚀 Coming Soon
  
 1. **Game Stats Dashboard**: 
@@ -28,16 +31,13 @@
 3. **Wishlist Price Tracker**  
    Receive notifications when your wishlist games are on sale.
 
-4. **Achievement Hunting**  
-   Track your progress for game achievements and get tips to complete them.
-
-5. **Library Visualizer**  
+4. **Library Visualizer**  
    A stunning visual representation of your game library by genres, playtime, and more.
 
-6. **Co-Op Game Finder**  
+5. **Co-Op Game Finder**  
    Discover multiplayer and co-op games you and your friends own.
 
-7. **Play Schedules**  
+6. **Play Schedules**  
    Coordinate game sessions with your friends using a built-in scheduler.
 
 ---
@@ -61,6 +61,7 @@ Here's how the project will evolve. Check back for updates!
 - [x] Fetch and display Steam library data  
 - [x] Game page with details and info like screenshots, platforms and achievements 
 - [x] Look up any steam game and see its details. Search by name or use the filters based on genre, etc.
+- [x] Check your game achievements
 - [ ] Build game stats dashboard  
 - [ ] Implement game recommendation engine  
 - [ ] Add wishlist price tracking  

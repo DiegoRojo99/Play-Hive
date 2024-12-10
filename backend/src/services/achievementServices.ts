@@ -1,3 +1,6 @@
+import NodeCache from 'node-cache';
+const gameCache = new NodeCache({ stdTTL: 86400, checkperiod: 3600 });
+
 /**
  * Fetches schema achievements for a specific game.
  * @param gameId - App ID of the game.
@@ -5,6 +8,14 @@
  */
 export const fetchGameAchievements = async (gameId: number): Promise<any> => {
   try {
+    
+    const cacheKey = `achievements_${gameId}`;
+    const cachedData: any | undefined = gameCache.get(cacheKey);
+    
+    if (cachedData) {
+      return cachedData;
+    }
+
     const response = await fetch(
       `http://api.steampowered.com/ISteamUserStats/GetSchemaForGame/v2/?key=${process.env.STEAM_API_KEY}&appid=${gameId}`
     );
@@ -21,6 +32,7 @@ export const fetchGameAchievements = async (gameId: number): Promise<any> => {
       throw new Error('Game schema does not contain achievements.');
     }
 
+    gameCache.set(cacheKey, gameAchievements);
     return gameAchievements;
   } catch (error: any) {
     console.error(`Error fetching game achievements: ${error.message}`);
@@ -39,6 +51,14 @@ export const fetchUserAchievements = async (
   userId: string
 ): Promise<{ userAchievements: any[]; gameName: string }> => {
   try {
+    
+    const cacheKey = `achievements_${gameId}_${userId}`;
+    const cachedData: any | undefined = gameCache.get(cacheKey);
+    
+    if (cachedData) {
+      return cachedData;
+    }
+
     const response = await fetch(
       `https://api.steampowered.com/ISteamUserStats/GetPlayerAchievements/v0001/?appid=${gameId}&steamid=${userId}&key=${process.env.STEAM_API_KEY}`
     );
@@ -59,10 +79,14 @@ export const fetchUserAchievements = async (
       throw new Error('No achievements found for the user.');
     }
 
-    return {
+    let userAchievements =  {
       userAchievements: playerStats.achievements,
       gameName: playerStats.gameName,
-    };
+    }
+
+    gameCache.set(cacheKey, userAchievements);
+    return userAchievements;
+    
   } catch (error: any) {
     console.error(`Error fetching user achievements: ${error.message}`);
     throw new Error(error.message || 'Unable to fetch user achievements');
