@@ -1,3 +1,6 @@
+import NodeCache from 'node-cache';
+const gameCache = new NodeCache({ stdTTL: 86400, checkperiod: 3600 });
+
 /**
  * Fetches schema achievements for a specific game.
  * @param gameId - App ID of the game.
@@ -5,6 +8,14 @@
  */
 export const fetchGameAchievements = async (gameId: number): Promise<any> => {
   try {
+    
+    const cacheKey = `achievements_${gameId}`;
+    const cachedData: any | undefined = gameCache.get(cacheKey);
+    
+    if (cachedData) {
+      return cachedData;
+    }
+
     const response = await fetch(
       `http://api.steampowered.com/ISteamUserStats/GetSchemaForGame/v2/?key=${process.env.STEAM_API_KEY}&appid=${gameId}`
     );
@@ -21,6 +32,7 @@ export const fetchGameAchievements = async (gameId: number): Promise<any> => {
       throw new Error('Game schema does not contain achievements.');
     }
 
+    gameCache.set(cacheKey, gameAchievements);
     return gameAchievements;
   } catch (error: any) {
     console.error(`Error fetching game achievements: ${error.message}`);

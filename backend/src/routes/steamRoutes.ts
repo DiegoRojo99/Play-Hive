@@ -6,7 +6,9 @@ const gameCache = new NodeCache({ stdTTL: 86400, checkperiod: 3600 });
 
 router.get('/game/:appid', async (req: Request, res: Response) : Promise<any> => {
   const { appid } = req.params;
-  const cachedData: any | undefined = gameCache.get(appid);
+
+  const cacheKey = `details_${appid}`;
+  const cachedData: any | undefined = gameCache.get(cacheKey);
   
   if (cachedData) {
     return res.json(cachedData);
@@ -18,7 +20,7 @@ router.get('/game/:appid', async (req: Request, res: Response) : Promise<any> =>
       throw new Error('Failed to fetch data from Steam');
     }
     const data = await response.json();
-    gameCache.set(appid, data);
+    gameCache.set(cacheKey, data);
     res.json(data);
   } 
   catch (error) {
