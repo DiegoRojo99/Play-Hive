@@ -45,7 +45,9 @@ const PlayerGameAchievements = () => {
         );
 
         if (!achievementsResponse.ok) {
-          throw new Error(`Error fetching achievements: ${achievementsResponse.statusText}`);
+          const errorData = await achievementsResponse.json(); 
+          const errorMessage = errorData.error || `Error fetching achievements: ${achievementsResponse.statusText}`;
+          throw new Error(errorMessage); 
         }
 
         const { gameAchievements, userAchievements, gameName } = await achievementsResponse.json();
@@ -55,7 +57,12 @@ const PlayerGameAchievements = () => {
         
         setGameName(gameName);
       } catch (err: any) {
-        setError(err.message);
+        if(err.message === "Game schema does not contain achievements."){
+          setError("This game does not have achievements.");
+        }
+        else{
+          setError(err.message);
+        }
       } finally {
         setLoading(false);
       }
@@ -67,7 +74,7 @@ const PlayerGameAchievements = () => {
   }, [gameId, user?.id]);
 
   if (loading) return <Loader />;
-  if (error) return <div className="error-message">Error: {error}</div>;
+  if (error) return <div className="error-message">{error}</div>;
 
   return (
     <div className="achievements-container">
