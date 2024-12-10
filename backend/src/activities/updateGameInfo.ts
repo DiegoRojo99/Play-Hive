@@ -24,9 +24,11 @@ const updateGamesWithNullDescriptions = async (limit: number, name: string) => {
 
       try {
         const response = await fetch(`https://store.steampowered.com/api/appdetails?appids=${appid}`);
+        if(!response.ok){
+          return;
+        }
         const data = await response.json();
-
-        if(!data){
+        if(!data?.[appid]){
           console.log("Null Data")
         }
         else if (data?.[appid]?.success) {
@@ -86,22 +88,38 @@ const updateGamesWithNullDescriptions = async (limit: number, name: string) => {
   }
 };
 
+const getGamesWithoutNullDescriptions = async () => {
+  try {
+    const games = await prisma.game.findMany({
+      where: { description: {not: null} },
+      select: {appid: true},
+      orderBy: { appid: 'asc' },
+    });
+
+    console.log(`${games.length} games already pulled`);
+  } catch (error) {
+    console.error('Error fetching games:', error);
+  }
+};
+
 const getGamesWithNullDescriptions = async () => {
   try {
     const games = await prisma.game.findMany({
       where: { description: null },
+      select: {appid: true},
       orderBy: { appid: 'asc' },
     });
 
-    console.log(`Found ${games.length} games with null descriptions.`);
+    console.log(`${games.length} games yet to be pulled`);
   } catch (error) {
     console.error('Error fetching games:', error);
   }
 };
 
 async function runUpdate(){
-  // await getGamesWithNullDescriptions();
-  updateGamesWithNullDescriptions(5000, "");
+  await getGamesWithoutNullDescriptions();
+  await getGamesWithNullDescriptions();
+  updateGamesWithNullDescriptions(200, "pack");
 }
 
 runUpdate();
