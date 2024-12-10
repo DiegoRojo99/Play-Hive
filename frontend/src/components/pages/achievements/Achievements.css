@@ -1,0 +1,141 @@
+.achievements-container {
+  margin: 32px 16px;
+  font-family: Arial, sans-serif;
+  color: #333;
+}
+
+.achievements-user-info{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-bottom: 16px
+}
+
+.achievements-game-name {
+  font-size: 40px;
+  margin: auto 16px;
+  text-align: center;
+}
+
+.achievements-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 20px;
+}
+
+@media screen and (max-width: 720px) {
+  .achievements-game-name{
+    font-size: 32px;
+  }
+  .achievements-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(256px, 1fr));
+    gap: 16px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .achievements-user-info {
+    display: flex;
+    flex-direction: column;
+  }
+  .achievements-game-name{
+    margin-bottom: 16px;
+  }
+  .achievements-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+}
+
+.achievement-card {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 15px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  background-color: #f9f9f9;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.achievement-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.achievement-icon {
+  width: 80px;
+  height: 80px;
+  margin-right: 15px;
+  border-radius: 5px;
+  object-fit: cover;
+}
+
+.locked-icon {
+  filter: grayscale(100%);
+  opacity: 0.5;
+}
+
+.achievement-details {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.achievement-details h3 {
+  font-size: 18px;
+  margin: 0;
+}
+
+.achievement-details p {
+  font-size: 14px;
+  margin: 2px 0;
+}
+
+.achievement-unlock-date {
+  text-align: right;
+  font-size: 14px;
+  color: #555;
+  width: 80px;
+  height: 100%;
+}
+
+.achievement-unlocked {
+  color: green;
+  font-weight: bold;
+}
+
+.achievement-locked {
+  color: red;
+  font-weight: bold;
+}
+
+.progress-bar-container {
+  margin-top: 20px;
+  padding: 0 15px;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 15px;
+  background-color: #ddd;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-top: 10px;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background-color: #4caf50;
+  border-radius: 10px;
+  transition: width 0.5s ease;
+}
+
+.progress-bar-container p {
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+}

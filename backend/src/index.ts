@@ -10,6 +10,7 @@ import steamRoutes from './routes/steamRoutes';
 import gameRoutes from './routes/gameRoutes';
 import userRoutes from './routes/userRoutes';
 import listRoutes from './routes/listRoutes';
+import achievementRoutes from './routes/achievementRoutes';
 
 import './passport/steamStrategy';
 
@@ -57,6 +58,7 @@ app.use('/api/steam', steamRoutes);
 app.use('/api/games', gameRoutes);
 app.use('/api/user', userRoutes);
 app.use('/api/lists', listRoutes);
+app.use('/api/achievements', achievementRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server running on ${process.env.BACKEND_URL}`);

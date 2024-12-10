@@ -31,7 +31,7 @@ const LibraryCollection: React.FC<LibraryItemProps> = ({games, name, refresh, li
       </div>
       {collectionOpen && 
         <div className="library-grid">
-          {games.map( game => <LibraryItem key={game.appid} game={game} />)}
+          {games.map( game => <LibraryItem key={game.appid} game={game} library={!list} />)}
           {list &&
             <div className="library-item empty-game" key="empty-game" onClick={toggleModal} >
               <div className="empty-game-content">

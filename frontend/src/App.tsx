@@ -8,6 +8,7 @@ import GameBrowser from './components/pages/games/GameBrowser';
 import AuthPage from './components/pages/login/AuthPage';
 import Settings from './components/pages/Settings';
 import Home from './components/pages/Home';
+import PlayerGameAchievements from './components/pages/achievements/PlayerGameAchievements';
 
 const App: React.FC = () => {
   return (
@@ -24,6 +25,9 @@ const App: React.FC = () => {
               <Route path="/login" element={<AuthPage />} />
               <Route path="/" element={<Home />} />
               <Route path="/settings" element={<Settings />} />
+
+              <Route path="/game/:gameId/achievements" element={<PlayerGameAchievements />} />
+        
             </Routes>
         </main>
       </div>

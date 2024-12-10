@@ -1,10 +1,10 @@
-interface SteamUser {
+type SteamUser = {
   steamID: string;
   username: string;
   avatar: string;
 }
 
-interface Game {
+type Game = {
   appid: number;
   has_community_visible_stats: boolean;
   img_icon_url: string;
@@ -155,6 +155,21 @@ type List = {
   updatedAt: Date;
 }
 
+type UserAchievement = {
+  apiname: string;
+  achieved: boolean;
+  unlocktime: number;
+}
+
+type GameAchievement = {
+  name: string;
+  displayName: string;
+  description: string;
+  icon: string;
+  iconGray: string;
+}
+
+
 export type {
   SteamUser,
   Game,
@@ -164,5 +179,7 @@ export type {
   SupabaseUser,
   SteamProfile,
   CompleteUser,
-  List
+  List,
+  UserAchievement,
+  GameAchievement
 }
