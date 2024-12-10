@@ -62,21 +62,19 @@
   .library-item-text {
     font-size: 14px;
   }
-
-  .library-item img {
-    height: 150px;
-  }
 }
 
 @media (max-width: 480px) {
+  
+  .library-grid {
+    grid-template-columns: 1fr;
+    margin: 0 8px;
+  }
+
   .library-item-text {
     font-size: 12px;
   }
 
-  .library-item img {
-    height: 120px;
-  }
-  
   .empty-game {
     height: 120px;
     width: 256px;
